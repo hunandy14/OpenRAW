@@ -27,3 +27,6 @@
 *.exe
 *.out
 *.app
+
+# Image files
+IMG_OUT.raw
