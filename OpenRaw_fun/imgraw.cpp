@@ -266,7 +266,7 @@ void imgraw::pri_htg(string title=""){
         // 左邊邊攔說明
         cout << setw(temp.length())
              << htg_high/epart*(i+1) << " ";
-        // 徒刑
+        // 圖形
         for (unsigned j = 0; j < epart; ++j)
             cout << setw(space) <<htg_str[j][i];
         cout << endl;
