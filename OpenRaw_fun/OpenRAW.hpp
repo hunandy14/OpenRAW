@@ -99,15 +99,11 @@ namespace imr{
         // imgraw
         void read(string filename);
         void write(string filename);
-        imch point_read(imint y, imint x);
-        void point_write(imint y, imint x, imch value);
         imch & at2d(size_t y, size_t x);
         const imch & at2d(size_t y, size_t x) const;
         void resize_canvas(size_t size);
         void resize_canvas(ImrSize size);
-        imint w();
-        imint h();
-        void info();
+        void info(string name);
         void binarizae(imch value, imch high, imch low);
         void value(imch value);
         // Mask

@@ -11,6 +11,7 @@ updata
 7. []Imrmask主資料結構修改成\* 避免浪費時間
 8. [v]resize_canvas(imint filesize) 是否要加入
 9. [v]maskinfo(string name) 加入neme引入
+10. [v]刪除部分重複代碼
 
 [^即時反饋]:ImrMask 可以新增一組隨機數或是自定義數兩個方法
 	方便測試演算法的時候用，獲得即時反饋

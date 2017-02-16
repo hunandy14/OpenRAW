@@ -50,16 +50,6 @@ void imgraw::write(string filename) {
     img_file.write((char*)&img_data[0], this->filesize);
     img_file.close();
 }
-// 讀檔單點(檢查邊界)
-imch imgraw::point_read(imint y, imint x) {
-    imint pos = (y*this->width)+x;
-    return this->img_data.at(pos);
-}
-// 寫入記憶體單點(檢查邊界)
-void imgraw::point_write(imint y, imint x, imch value) {
-    imint pos = (y*this->width)+x;
-    this->img_data.vector::at(pos) = value;
-}
 // 以二維方式讀取或寫入(檢查邊界)
 imch& imgraw::at2d(size_t y, size_t x){
     size_t pos = (y*this->width)+x;
@@ -83,18 +73,10 @@ void imgraw::resize_canvas(ImrSize size) {
     this->img_data.vector::resize(x*y);
     this->filesize = x*y;
 }
-// 獲得寬
-imint imgraw::w() {
-    return this->width;
-}
-// 獲得高
-imint imgraw::h() {
-    return this->high;
-}
 // 印出畫布大小
-void imgraw::info(){
-    cout << "畫布大小(寬x長) = " << this->width
-         << " x " << this->high << endl;
+void imgraw::info(string name=""){
+    cout << "[" << name << "]畫布大小(寬x長) = ";
+    cout << this->width << " x " << this->high << endl;
 }
 // 二值化(界線, 填色數值, 背景數值)
 void imgraw::binarizae(imch value=128,
@@ -113,10 +95,8 @@ void imgraw::binarizae(imch value=128,
 }
 // 一次更改所有像素(更改的數值)
 void imgraw::value(imch value){
-    int len = this->width * this->high;
-    for (int i = 0; i < len; ++i){
-        (*this)[i] = value;
-    }
+    for(auto&& i : this->img_data)
+        i = value;
 }
 /*
      ##   ##                    ##
