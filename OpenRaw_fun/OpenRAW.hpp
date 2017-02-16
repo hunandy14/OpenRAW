@@ -14,6 +14,7 @@ Final: 2017/02/14
 #include <string>
 #include <iomanip>
 #include <sstream>
+#include <cmath>
 using namespace std;
 typedef unsigned char imch;
 typedef size_t imint;
@@ -94,9 +95,11 @@ namespace imr{
                             #####
     */
     class imgraw {
-    public:
+    public: // 建構子
         imgraw(ImrSize size);
-        // imgraw
+        // const size_t one_byte=8;
+        #define one_byte 256
+    public: // imgraw
         void read(string filename);
         void write(string filename);
         imch & at2d(size_t y, size_t x);
@@ -106,32 +109,33 @@ namespace imr{
         void info(string name);
         void binarizae(imch value, imch high, imch low);
         void value(imch value);
-        // Mask
+    public: // Mask
         void setMaskSize(ImrSize masksize);
         imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi);
         const imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi) const;
         ImrMask getMask(ImrCoor ori, ImrCoor shi);
-        // histogram
+    public: // histogram
         void pri_htg(string title);
-        // 重載運算子
+    private: // 重載運算子
         imch & operator[](const size_t __n);
         const imch & operator[](const size_t __n) const;
         imgraw operator+(const imgraw &p);
         imgraw operator+(const imch value);
         imgraw operator-(const imgraw &p);
         imgraw operator-(const imch value);
-    private:
+    private: // 必要成員(建構)
         imint width;
         imint high;
         vector<imch> img_data;
         ifstream::pos_type filesize;
-        string filename;
-        imch max;
-        imch min;
-        int htg_data[256];
-        void histogram();
-        void extremum();
+    private: // 成員(函式)
         ImrSize masksize;
+        string filename;
+        imch max, min;
+        imch img_extr[2]; // 圖像極值
+        int htg_data[256];
+        void extremum();
+        void histogram();
     };
 };
 
