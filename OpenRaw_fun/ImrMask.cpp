@@ -40,7 +40,8 @@ const imch& ImrMask::at2d(size_t y, size_t x) const{
     return this->mask[pos];
 }
 // 印出資訊
-void ImrMask::info(){
+void ImrMask::info(string name=""){
+    cout << name << endl;
     for (unsigned j = 0; j < masksize.high; ++j){
         for (unsigned i = 0; i < masksize.width; ++i){
             cout << setw(4) << (size_t)this->at2d(j, i);

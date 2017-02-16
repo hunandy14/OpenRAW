@@ -21,7 +21,9 @@ using namespace imr;
 int main(int argc, char const *argv[]) {
     // 創建畫布
     imgraw img(ImrSize(Pic_y, Pic_x));
-    imgraw img_2(ImrSize(Pic_y, Pic_x));
+    // imgraw img_2(ImrSize(Pic_y, Pic_x));
+    imgraw img_2(ImrSize(0, 0));
+    img_2.resize_canvas(ImrSize(Pic_y, Pic_x));
     // 讀取檔案
     img.read(Pic_name_in);
     //---------------------------------------------------------

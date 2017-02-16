@@ -27,11 +27,9 @@ int main(int argc, char const *argv[]) {
     img.setMaskSize(ImrSize(4,4));
     // 創建遮罩
     ImrMask mask(ImrSize(4,4), 0);
-    mask.info();
     // 取得Mask陣列及排續 getMask(原點位置)
     mask = img.getMask(ImrCoor(1,1));
-    cout << endl<< "setMaskSize" << endl;
-    mask.info();
+    mask.info("setMaskSize");
 
     // 原圖比較
     cout << endl<< "Original" << endl;
@@ -39,12 +37,11 @@ int main(int argc, char const *argv[]) {
         for(int i = 0; i < 4; ++i) {
             cout << (int)img.at2d(j, i) << " ";
         }cout << endl;
-    }
+    }cout << endl;
 
     // 排序
     mask.sort();
-    cout << endl<< "sort" << endl;
-    mask.info();
+    mask.info("sort");
     // 取平均值
     cout << "avg=" << (int)mask.avg() << endl;
     //---------------------------------------------------------

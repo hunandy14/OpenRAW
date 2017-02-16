@@ -45,10 +45,10 @@ void imgraw::read(string filename) {
 // 將記憶體資料匯出
 void imgraw::write(string filename) {
     // 進位模式寫檔
-    fstream img;
-    img.open(filename, ios::out | ios::binary);
-    img.write((char*)&img_data[0], this->filesize);
-    img.close();
+    fstream img_file;
+    img_file.open(filename, ios::out | ios::binary);
+    img_file.write((char*)&img_data[0], this->filesize);
+    img_file.close();
 }
 // 讀檔單點(檢查邊界)
 imch imgraw::point_read(imint y, imint x) {
@@ -70,13 +70,18 @@ const imch& imgraw::at2d(size_t y, size_t x) const{
     return this->img_data.at(pos);
 }
 // 調整畫布大小
+void imgraw::resize_canvas(size_t size) {
+    this->width = 0;
+    this->high = 0;
+    this->img_data.vector::resize(size);
+    this->filesize = size;
+}
 void imgraw::resize_canvas(ImrSize size) {
-    imint x = size.width;
-    imint y = size.high;
-    // cout << "x=" << x << endl;
-    // cout << "y=" << y << endl;
+    size_t y=size.high, x=size.width;
     this->width = x;
     this->high = y;
+    this->img_data.vector::resize(x*y);
+    this->filesize = x*y;
 }
 // 獲得寬
 imint imgraw::w() {

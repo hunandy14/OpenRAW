@@ -70,7 +70,7 @@ namespace imr{
         ImrMask(ImrSize masksize);
         ImrMask(ImrSize masksize, imch value);
         void sort(size_t len, size_t start);
-        void info();
+        void info(string name);
         imch avg();
         // 重載運算子
         imch & operator[](const size_t __n);
@@ -103,6 +103,7 @@ namespace imr{
         void point_write(imint y, imint x, imch value);
         imch & at2d(size_t y, size_t x);
         const imch & at2d(size_t y, size_t x) const;
+        void resize_canvas(size_t size);
         void resize_canvas(ImrSize size);
         imint w();
         imint h();
