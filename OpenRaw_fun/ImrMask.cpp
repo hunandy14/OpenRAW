@@ -56,4 +56,11 @@ imch ImrMask::avg(){
         temp += (double)(*this)[i];
     return (imch)((temp/len)+0.5);
 }
+// 取得中值
+imch ImrMask::median(){
+    size_t len=this->masksize.high * this->masksize.width;
+    size_t idx=floor(len/2);
+    this->sort();
+    return (*this)[idx];
+}
 } //imr

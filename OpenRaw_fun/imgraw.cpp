@@ -171,13 +171,6 @@ ImrMask imgraw::getMask(ImrCoor ori,
             mask.at2d(j,i)=this->maskVal(ori, mas, shi);
         }
     }
-    // ¦L¥X
-    // for (int j = 0; j < 3; ++j){
-    //     for (int i = 0; i < 3; ++i){
-    //         cout << mask.at2d(j,i);
-    //     }cout << endl;
-    // }
-    // return ImrMask();
     return mask;
 }
 // ³]©w¾B¸n

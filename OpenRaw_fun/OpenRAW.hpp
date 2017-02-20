@@ -72,6 +72,7 @@ namespace imr{
         void sort(size_t len, size_t start);
         void info(string name);
         imch avg();
+        imch median();
         // 重載運算子
         imch & operator[](const size_t __n);
         const imch & operator[](const size_t __n) const;

@@ -43,6 +43,8 @@ int main(int argc, char const *argv[]) {
     mask.info("sort");
     // 取平均值
     cout << "avg=" << (int)mask.avg() << endl;
+    // 取中值
+    cout << "median=" << (int)mask.median() << endl;
     //---------------------------------------------------------
     // 提示訊息
     img.info();
