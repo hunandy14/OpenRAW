@@ -16,8 +16,7 @@ Final: 2017/02/14
 #include <sstream>
 #include <cmath>
 using namespace std;
-typedef unsigned char imch;
-typedef size_t imint;
+using imch=unsigned char;
 
 namespace imr{
     /*
@@ -31,9 +30,9 @@ namespace imr{
     */
     class ImrSize{
     public:
-        ImrSize(imint y, imint x);
-        imint high;
-        imint width;
+        ImrSize(size_t y, size_t x);
+        size_t high;
+        size_t width;
         void info();
     };
     /*
@@ -124,15 +123,14 @@ namespace imr{
         imgraw operator-(const imgraw &p);
         imgraw operator-(const imch value);
     private: // 必要成員(建構)
-        imint width;
-        imint high;
+        size_t width;
+        size_t high;
         vector<imch> img_data;
         ifstream::pos_type filesize;
     private: // 成員(函式)
         ImrSize masksize;
         string filename;
         imch max, min;
-        imch img_extr[2]; // 圖像極值
         int htg_data[256];
         void extremum();
         void histogram();

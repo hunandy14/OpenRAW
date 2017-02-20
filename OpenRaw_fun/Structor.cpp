@@ -7,7 +7,7 @@ Final: 2016/10/13
 #include "OpenRAW.hpp"
 namespace imr{
 // ImrSize建構子
-ImrSize::ImrSize(imint high=0, imint width=0)
+ImrSize::ImrSize(size_t high=0, size_t width=0)
 : high(high), width(width){
 
 }
@@ -23,8 +23,11 @@ ImrMask::ImrMask(ImrSize masksize)
 }
 ImrMask::ImrMask(ImrSize masksize, imch value)
 : mask(masksize.high * masksize.width), masksize(masksize){
-    for (unsigned i = 0; i < masksize.high*masksize.width; ++i){
-        this->mask[i] = value;
+    // for (unsigned i = 0; i < masksize.high*masksize.width; ++i){
+    //     this->mask[i] = value;
+    // }
+    for(auto&& i : this->mask) {
+    	i=value;
     }
 }
 // imgraw建構子

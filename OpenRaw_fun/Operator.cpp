@@ -59,15 +59,17 @@ const imch& ImrMask::operator[](const size_t __n) const{
 }
 ImrMask ImrMask::operator+(const ImrMask &p){
     // 獲得最大長度
-    imint y = this->masksize.high>p.masksize.high?
+    size_t y_max = this->masksize.high>p.masksize.high?
                 this->masksize.high: p.masksize.high;
-    imint x = this->masksize.width>p.masksize.width?
+    size_t x_max = this->masksize.width>p.masksize.width?
                 this->masksize.width: p.masksize.width;
     // 獲得最小長度
-    imint y_min = this->masksize.high<p.masksize.high? this->masksize.high: p.masksize.high;
-    imint x_min = this->masksize.width<p.masksize.width? this->masksize.width: p.masksize.width;
+    size_t y_min = this->masksize.high<p.masksize.high? 
+                this->masksize.high: p.masksize.high;
+    size_t x_min = this->masksize.width<p.masksize.width?
+                this->masksize.width: p.masksize.width;
     // 創建暫存影像
-    ImrMask temp(ImrSize(y, x));
+    ImrMask temp(ImrSize(y_max, x_max));
     // 單點相加
     for (int j = 0; j < (int)y_min; ++j){
         for (int i = 0; i < (int)x_min; ++i){
@@ -85,15 +87,15 @@ ImrMask ImrMask::operator+(const ImrMask &p){
 }
 ImrMask ImrMask::operator-(const ImrMask &p){
     // 獲得最大長度
-    imint y = this->masksize.high>p.masksize.high?
+    size_t y_max = this->masksize.high>p.masksize.high?
                 this->masksize.high: p.masksize.high;
-    imint x = this->masksize.width>p.masksize.width?
+    size_t x_max = this->masksize.width>p.masksize.width?
                 this->masksize.width: p.masksize.width;
     // 獲得最小長度
-    imint y_min = this->masksize.high<p.masksize.high? this->masksize.high: p.masksize.high;
-    imint x_min = this->masksize.width<p.masksize.width? this->masksize.width: p.masksize.width;
+    size_t y_min = this->masksize.high<p.masksize.high? this->masksize.high: p.masksize.high;
+    size_t x_min = this->masksize.width<p.masksize.width? this->masksize.width: p.masksize.width;
     // 創建暫存影像
-    ImrMask temp(ImrSize(y, x));
+    ImrMask temp(ImrSize(y_max, x_max));
     // 單點相加
     for (int j = 0; j < (int)y_min; ++j){
         for (int i = 0; i < (int)x_min; ++i){
@@ -127,8 +129,8 @@ const imch& imgraw::operator[](const size_t __n) const{
 }
 imgraw imgraw::operator+(const imgraw &p){
     // 獲得最大長度
-    imint y = this->high>p.high? this->high: p.high;
-    imint x = this->width>p.width? this->width: p.width;
+    size_t y = this->high>p.high? this->high: p.high;
+    size_t x = this->width>p.width? this->width: p.width;
     // 創建暫存影像
     imgraw temp(ImrSize(y, x));
     // 取得影像總像素
@@ -146,8 +148,8 @@ imgraw imgraw::operator+(const imgraw &p){
 }
 imgraw imgraw::operator+(const imch value){
     // 獲得最大長度
-    imint y = this->high;
-    imint x = this->width;
+    size_t y = this->high;
+    size_t x = this->width;
     // 創建暫存影像
     imgraw temp(ImrSize(y, x));
     // 取得影像總像素
@@ -165,8 +167,8 @@ imgraw imgraw::operator+(const imch value){
 }
 imgraw imgraw::operator-(const imgraw &p){
     // 獲得最大長度
-    imint y = this->high>p.high? this->high: p.high;
-    imint x = this->width>p.width? this->width: p.width;
+    size_t y = this->high>p.high? this->high: p.high;
+    size_t x = this->width>p.width? this->width: p.width;
     // 創建暫存影像
     imgraw temp(ImrSize(y, x));
     // 取得影像總像素
@@ -184,8 +186,8 @@ imgraw imgraw::operator-(const imgraw &p){
 }
 imgraw imgraw::operator-(const imch value){
     // 獲得最大長度
-    imint y = this->high;
-    imint x = this->width;
+    size_t y = this->high;
+    size_t x = this->width;
     // 創建暫存影像
     imgraw temp(ImrSize(y, x));
     // 取得影像總像素

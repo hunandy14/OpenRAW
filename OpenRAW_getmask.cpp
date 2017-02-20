@@ -30,7 +30,6 @@ int main(int argc, char const *argv[]) {
     // 取得Mask陣列及排續 getMask(原點位置)
     mask = img.getMask(ImrCoor(1,1));
     mask.info("setMaskSize");
-
     // 原圖比較
     cout << endl<< "Original" << endl;
     for(int j = 0; j < 4; ++j){
