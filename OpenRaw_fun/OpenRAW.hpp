@@ -112,6 +112,7 @@ namespace imr{
         void value(imch value);
         imch & random();
         const imch & random() const;
+        void test(const imch & a);
     public: // Mask
         void setMaskSize(ImrSize masksize);
         imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi);

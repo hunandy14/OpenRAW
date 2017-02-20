@@ -104,10 +104,15 @@ imch & imgraw::random(){
     int up=this->filesize, low=0;
     idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
     cout << "idx=" << idx << endl;
+    cout << "*imgraw::random()" << endl;
     return (*this)[idx];
 }
 const imch & imgraw::random() const{
+    cout << "**imgraw::random() const" << endl;
     return random();
+}
+void imgraw::test(const imch & a){
+    cout << (int)a << endl;
 }
 /*
      ##   ##                    ##

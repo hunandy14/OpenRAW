@@ -1,5 +1,26 @@
 ﻿問題記錄檔
 ===
+## 20170220
+### const 函數可以被整合嗎
+```cpp
+imch & imgraw::random(){
+    size_t idx;
+    int up=this->filesize, low=0;
+    idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
+    cout << "idx=" << idx << endl;
+    cout << "*imgraw::random()" << endl;
+    return (*this)[idx];
+}
+const imch & imgraw::random() const{
+    cout << "**imgraw::random() const" << endl;
+    return random();
+}
+void imgraw::test(const imch & a){
+    cout << (int)a << endl;
+}
+```
+然後就是，為什麼 const 版本的函式怎麼樣都不會執行QQ
+
 
 ## 20161013
 ### 方法裡面不應該存在模擬兩可

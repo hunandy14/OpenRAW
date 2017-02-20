@@ -12,7 +12,7 @@ Final: 2017/02/14
 using namespace std;
 using namespace imr;
 
-#define AutoOpen 1
+#define AutoOpen 0
 #define Pic_name_in "IMG.raw"
 #define Pic_name_out "IMG_OUT.raw"
 #define Pic_x 256
@@ -34,8 +34,9 @@ int main(int argc, char const *argv[]) {
             img_2.at2d(j,i)=img.at2d(j,i);
         }
     }
-    cout << (int)img.random() << endl;
-    const imch t=img.random();
+    // cout << (int)img.random() << endl;
+    // const imch t = img.random();
+    img.test(img.random());
     //---------------------------------------------------------
     // ´£¥Ü°T®§
     img_2.info("img_2");
