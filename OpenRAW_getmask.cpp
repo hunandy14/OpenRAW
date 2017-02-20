@@ -37,7 +37,6 @@ int main(int argc, char const *argv[]) {
             cout << (int)img.at2d(j, i) << " ";
         }cout << endl;
     }cout << endl;
-
     // 排序
     mask.sort();
     mask.info("sort");

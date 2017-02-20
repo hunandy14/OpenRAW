@@ -15,6 +15,7 @@ Final: 2017/02/14
 #include <iomanip>
 #include <sstream>
 #include <cmath>
+#include <ctime>
 using namespace std;
 using imch=unsigned char;
 
@@ -109,6 +110,8 @@ namespace imr{
         void info(string name);
         void binarizae(imch value, imch high, imch low);
         void value(imch value);
+        imch & random();
+        const imch & random() const;
     public: // Mask
         void setMaskSize(ImrSize masksize);
         imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi);

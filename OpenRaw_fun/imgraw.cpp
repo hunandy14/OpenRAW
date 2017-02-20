@@ -98,6 +98,17 @@ void imgraw::value(imch value){
     for(auto&& i : this->img_data)
         i = value;
 }
+// 隨機回傳一個點
+imch & imgraw::random(){
+    size_t idx;
+    int up=this->filesize, low=0;
+    idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
+    cout << "idx=" << idx << endl;
+    return (*this)[idx];
+}
+const imch & imgraw::random() const{
+    return random();
+}
 /*
      ##   ##                    ##
      ##   ##                    ##

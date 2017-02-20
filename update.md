@@ -7,7 +7,7 @@ updata
 3. []mask改回int(可能存在-的遮罩)
 4. [v]重設畫布大小沒有重設vector大小
 5. []使用繼承，寫太多次at2d()而且資料結構都一樣
-6. []加入隨機取亂數的函式
+6. [v]加入隨機取亂數的函式
 7. [x]Imrmask主資料結構修改成\* 避免浪費時間
 8. [v]resize_canvas(imint filesize) 是否要加入
 9. [v]maskinfo(string name) 加入neme引入
