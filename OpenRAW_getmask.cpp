@@ -46,7 +46,7 @@ int main(int argc, char const *argv[]) {
     cout << "median=" << (int)mask.median() << endl;
     //---------------------------------------------------------
     // 提示訊息
-    img.info();
+    img.info("img");
     //---------------------------------------------------------
     // 輸出檔案
     img.write(Pic_name_out);

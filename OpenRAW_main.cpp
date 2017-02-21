@@ -2,7 +2,7 @@
 Name : OpenRAW_main
 Date : 2016/08/03
 By   : CharlotteHonG
-Final: 2017/02/14
+Final: 2017/02/21
 **********************************************************/
 #include <iostream>
 #include "OpenRAW_fun\OpenRAW.hpp"

@@ -11,7 +11,7 @@ Final: 2016/10/13
 using namespace std;
 using namespace imr;
 
-#define AutoOpen 1
+#define AutoOpen 0
 #define Pic_name_in "IMG.raw"
 #define Pic_name_out "IMG_OUT.raw"
 #define Pic_x 256
@@ -42,7 +42,7 @@ int main(int argc, char const *argv[]) {
     }
     //---------------------------------------------------------
     // 提示訊息
-    img.info();
+    img.info("img");
     //---------------------------------------------------------
     // 輸出檔案
     img.write(Pic_name_out);
