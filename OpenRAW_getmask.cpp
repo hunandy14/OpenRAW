@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]) {
     // 設定遮罩(預設為3x3)
     img.setMaskSize(ImrSize(4,4));
     // 取得Mask陣列及排續 getMask(原點位置)
-    ImrMask mask = img.getMask(ImrCoor(1,1));
+    ImrMask mask(img.getMask(ImrCoor(1,1)));
     mask.info("setMaskSize");
     // 原圖比較
     img.pri_blk("Origin", ImrCoor(0, 0), ImrSize(4, 4));
