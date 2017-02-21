@@ -103,9 +103,9 @@ const imch & imgraw::random() const{
 // °Ï¶ô¥´¦L
 void imgraw::pri_blk(string name, ImrCoor pos, ImrSize masksize){
     cout << name << endl;
-    for(unsigned j = pos.y; j < masksize.high; ++j){
-        for(unsigned i = pos.x; i < masksize.width; ++i) {
-            cout << (int)(*this).at2d(j, i) << " ";
+    for(unsigned j = pos.y; j < pos.y+masksize.high; ++j){
+        for(unsigned i = pos.x; i < pos.x+masksize.width; ++i) {
+            cout << setw(4) << (int)(*this).at2d(j, i);
         }cout << endl;
     }cout << endl;
 }

@@ -2,7 +2,7 @@
 Name : OpenRAW_maskVal 說明範例
 Date : 2016/10/04
 By   : CharlotteHonG
-Final: 2016/10/13
+Final: 2017/02/21
 **********************************************************/
 #include <iostream>
 #include "OpenRAW_fun\OpenRAW.hpp"
@@ -34,12 +34,7 @@ int main(int argc, char const *argv[]) {
         }cout << endl;
     }
     // 原圖比較
-    cout << endl<< "Original" << endl;
-    for(int j = 50; j < 54; ++j){
-        for(int i = 50; i < 54; ++i) {
-            cout << setw(4) << (int)img.at2d(j,i);
-        }cout << endl;
-    }
+    img.pri_blk("Origin", ImrCoor(50, 50), ImrSize(4, 4));
     //---------------------------------------------------------
     // 提示訊息
     img.info("img");
