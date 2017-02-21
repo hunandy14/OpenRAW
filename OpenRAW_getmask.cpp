@@ -23,12 +23,10 @@ int main(int argc, char const *argv[]) {
     // 讀取檔案
     img.read(Pic_name_in);
     //---------------------------------------------------------
-    // 設定遮罩
+    // 設定遮罩(預設為3x3)
     img.setMaskSize(ImrSize(4,4));
-    // 創建遮罩
-    ImrMask mask(ImrSize(4,4), 0);
     // 取得Mask陣列及排續 getMask(原點位置)
-    mask = img.getMask(ImrCoor(1,1));
+    ImrMask mask = img.getMask(ImrCoor(1,1));
     mask.info("setMaskSize");
     // 原圖比較
     img.pri_blk("Origin", ImrCoor(0, 0), ImrSize(4, 4));

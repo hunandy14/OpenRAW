@@ -7,7 +7,7 @@ updata
 4. []使用繼承，寫太多次at2d()而且資料結構都一樣
 5. []htg可選擇幾等分
 6. [v]htg加印極值
-7. []優化setMasksize
+7. [v]優化setMasksize
 8. [v]新增pri_blk()
 
 ---

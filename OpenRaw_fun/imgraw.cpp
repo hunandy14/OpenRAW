@@ -159,12 +159,7 @@ void imgraw::setMaskSize(ImrSize masksize){
 ImrMask imgraw::getMask(ImrCoor ori,
         ImrCoor shi = ImrCoor(-1,-1))
 {
-    if (this->masksize.high == 0
-        or this->masksize.width == 0){
-        cerr << "Error! Uninit masksize." << endl;
-        return ImrMask(ImrSize(0, 0));
-    }
-    // 創建動態陣列
+    // 創建臨時遮罩
     ImrMask mask(this->masksize);
     // 複製遮罩
     for (int j = 0; j < (int)this->masksize.high; ++j){

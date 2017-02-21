@@ -30,7 +30,7 @@ ImrMask::ImrMask(ImrSize masksize, imch value)
 imgraw::imgraw(ImrSize size)
 : width(size.width), high(size.high), 
 img_data(size.width*size.high), filesize(size.width*size.high),
-masksize(ImrSize(0,0)) {
+masksize(ImrSize(3, 3)) {
 	// 初始化亂數種子
     srand((unsigned)time(NULL)); rand();
 }

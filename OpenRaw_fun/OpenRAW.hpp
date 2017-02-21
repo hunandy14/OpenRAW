@@ -132,8 +132,8 @@ namespace imr{
         size_t high;
         vector<imch> img_data;
         ifstream::pos_type filesize;
-    private: // 成員(函式)
         ImrSize masksize;
+    private: // 成員(函式)
         string filename;
         imch max, min;
         int htg_data[256];
