@@ -82,16 +82,9 @@ void imgraw::info(string name=""){
 void imgraw::binarizae(imch value=128,
         imch high=255, imch low=0)
 {
-    int len = this->width * this->high;
-    // cout << "this[0]=" << (*this)[0] << endl;
-    for (int i = 0; i < len; ++i)
-    {
-        if( (*this)[i] > value ) {
-            (*this)[i] = high;
-        }else{
-            (*this)[i] = low;
-        }
-    }
+    size_t len = this->width * this->high;
+    for (unsigned i = 0; i < len; ++i)
+        (*this)[i] = (*this)[i]>value? high: low;
 }
 // 一次更改所有像素(更改的數值)
 void imgraw::value(imch value){
