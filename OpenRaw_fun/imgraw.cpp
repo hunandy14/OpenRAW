@@ -52,8 +52,8 @@ void imgraw::write(string filename) {
 }
 // 以二維方式讀取或寫入(檢查邊界)
 imch& imgraw::at2d(size_t y, size_t x){
-    size_t pos = (y*this->width)+x;
-    return this->img_data.at(pos);
+    return const_cast<imch&>(
+        static_cast<const imgraw&>(*this).at2d(y, x));
 }
 const imch& imgraw::at2d(size_t y, size_t x) const{
     size_t pos = (y*this->width)+x;
