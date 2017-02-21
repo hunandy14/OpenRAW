@@ -114,23 +114,12 @@ const imch & imgraw::random() const{
 imch& imgraw::maskVal(ImrCoor ori, ImrCoor mas,
         ImrCoor shi=ImrCoor(-1,-1))
 {
-    // 取得對應位置
-    ImrCoor pos = ori + mas + shi;
-    // 修正邊緣
-    if (pos.y <0){
-        pos.y = 0;
-    }
-    if (pos.y > (int)this->high-1){
-        pos.y = (int)this->high-1;
-    }
-    if (pos.x <0){
-        pos.x = 0;
-    }
-    if (pos.x > (int)this->width-1){
-        pos.x = (int)this->width-1;
-    }
     // 回傳正確位置的數值
-    return this->at2d((pos.y), (pos.x));
+    return const_cast<imch&>(
+        static_cast<const imgraw&>
+        (*this).maskVal(ori, mas, shi)
+    );
+    // return this->at2d((pos.y), (pos.x));
 }
 const imch& imgraw::maskVal(ImrCoor ori, ImrCoor mas,
         ImrCoor shi=ImrCoor(-1,-1)) const

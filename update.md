@@ -18,6 +18,7 @@ updata
 14. [v]加入隨機取亂數的函式的const函式
 15. [v]at2d() const函式整合
 16. [v]binarizae() 優化成單行
+17. [v]maskVal() const函式整合
 
 [^即時反饋]:ImrMask 可以新增一組隨機數或是自定義數兩個方法
 	方便測試演算法的時候用，獲得即時反饋
