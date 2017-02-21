@@ -17,9 +17,9 @@ Final: 2017/02/21
 #include <cmath>
 #include <ctime>
 using namespace std;
-using imch=unsigned char;
 
 namespace imr{
+    using imch=unsigned char;
     /*
          ######                      #####     ##
            ##                       ##   ##
