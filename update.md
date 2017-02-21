@@ -8,7 +8,9 @@ updata
 5. []htg可選擇幾等分
 6. []htg加印極值
 7. []優化setMasksize
+8. [v]新增pri_blk()
 
+---
 
 ## 2.6.0 版本改進項目
 1. []更完整的 重載計畫 http://goo.gl/iiATVh

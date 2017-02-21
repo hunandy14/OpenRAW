@@ -46,7 +46,7 @@ void ImrMask::info(string name=""){
         for (unsigned i = 0; i < masksize.width; ++i){
             cout << setw(4) << (size_t)this->at2d(j, i);
         }cout << endl;
-    }
+    }cout << endl;
 }
 // 取得平均值
 imch ImrMask::avg(){
@@ -59,6 +59,8 @@ imch ImrMask::avg(){
 // 取得中值
 imch ImrMask::median(){
     size_t len=this->masksize.high * this->masksize.width;
+    if(len==0)
+        return 0;
     size_t idx=floor(len/2);
     this->sort();
     return (*this)[idx];

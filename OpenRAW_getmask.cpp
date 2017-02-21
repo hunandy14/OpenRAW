@@ -2,7 +2,7 @@
 Name : OpenRAW_getmask 說明範例
 Date : 2016/10/04
 By   : CharlotteHonG
-Final: 2016/10/13
+Final: 2017/02/21
 **********************************************************/
 #include <iostream>
 #include "OpenRAW_fun\OpenRAW.hpp"
@@ -31,12 +31,7 @@ int main(int argc, char const *argv[]) {
     mask = img.getMask(ImrCoor(1,1));
     mask.info("setMaskSize");
     // 原圖比較
-    cout << endl<< "Original" << endl;
-    for(int j = 0; j < 4; ++j){
-        for(int i = 0; i < 4; ++i) {
-            cout << (int)img.at2d(j, i) << " ";
-        }cout << endl;
-    }cout << endl;
+    img.pri_blk("Origin", ImrCoor(0, 0), ImrSize(4, 4));
     // 排序
     mask.sort();
     mask.info("sort");

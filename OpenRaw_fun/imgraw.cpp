@@ -100,6 +100,15 @@ const imch & imgraw::random() const{
     size_t idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
     return (*this)[idx];
 }
+// 區塊打印
+void imgraw::pri_blk(string name, ImrCoor pos, ImrSize masksize){
+    cout << name << endl;
+    for(unsigned j = pos.y; j < masksize.high; ++j){
+        for(unsigned i = pos.x; i < masksize.width; ++i) {
+            cout << (int)(*this).at2d(j, i) << " ";
+        }cout << endl;
+    }cout << endl;
+}
 /*
      ##   ##                    ##
      ##   ##                    ##
@@ -142,13 +151,17 @@ const imch& imgraw::maskVal(ImrCoor ori, ImrCoor mas,
     // 回傳正確位置的數值
     return this->at2d((pos.y), (pos.x));
 }
+// 設定遮罩
+void imgraw::setMaskSize(ImrSize masksize){
+    this->masksize = masksize;
+}
 // 取得遮罩，回傳一維陣列(原點位置，位移維度)
 ImrMask imgraw::getMask(ImrCoor ori,
         ImrCoor shi = ImrCoor(-1,-1))
 {
     if (this->masksize.high == 0
-        && this->masksize.width == 0){
-        cout << "Error! Uninit masksize." << endl;
+        or this->masksize.width == 0){
+        cerr << "Error! Uninit masksize." << endl;
         return ImrMask(ImrSize(0, 0));
     }
     // 創建動態陣列
@@ -163,10 +176,6 @@ ImrMask imgraw::getMask(ImrCoor ori,
         }
     }
     return mask;
-}
-// 設定遮罩
-void imgraw::setMaskSize(ImrSize masksize){
-    this->masksize = masksize;
 }
 /*
 
