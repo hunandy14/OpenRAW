@@ -267,7 +267,10 @@ void imgraw::pri_htg(string title=""){
     // 數據說明欄
     for (unsigned i = 0; i < epart/2; ++i){
         cout << setw(6) << (i+1)*16;
-    }
-    cout << "" << endl;
+    }cout << endl;
+    // 打印極值
+    this->extremum();
+    cout << "max=" << (int)max << ", ";
+    cout << "min=" << (int)min << endl;
 }
 } // imr

@@ -9,6 +9,7 @@ updata
 6. []htg加印極值
 7. []優化setMasksize
 8. [v]新增pri_blk()
+9. [v]打印極值
 
 ---
 
