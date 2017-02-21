@@ -112,7 +112,6 @@ namespace imr{
         void value(imch value);
         imch & random();
         const imch & random() const;
-        void test(const imch & a);
     public: // Mask
         void setMaskSize(ImrSize masksize);
         imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi);
@@ -120,7 +119,7 @@ namespace imr{
         ImrMask getMask(ImrCoor ori, ImrCoor shi);
     public: // histogram
         void pri_htg(string title);
-    private: // 重載運算子
+    public: // 重載運算子
         imch & operator[](const size_t __n);
         const imch & operator[](const size_t __n) const;
         imgraw operator+(const imgraw &p);

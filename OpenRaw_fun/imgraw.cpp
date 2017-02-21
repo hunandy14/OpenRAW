@@ -100,19 +100,12 @@ void imgraw::value(imch value){
 }
 // 隨機回傳一個點
 imch & imgraw::random(){
-    size_t idx;
-    int up=this->filesize, low=0;
-    idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
-    cout << "idx=" << idx << endl;
-    cout << "*imgraw::random()" << endl;
-    return (*this)[idx];
+    return const_cast<imch&>(static_cast<const imgraw&>(*this).random());
 }
 const imch & imgraw::random() const{
-    cout << "**imgraw::random() const" << endl;
-    return random();
-}
-void imgraw::test(const imch & a){
-    cout << (int)a << endl;
+    int up=this->filesize, low=0;
+    size_t idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
+    return (*this)[idx];
 }
 /*
      ##   ##                    ##

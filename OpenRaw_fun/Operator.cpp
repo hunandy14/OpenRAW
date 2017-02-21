@@ -52,7 +52,7 @@ ImrCoor ImrCoor::operator/(const ImrCoor &p){
 */
 
 imch& ImrMask::operator[](const size_t __n){
-    return this->mask[__n];
+    return const_cast<imch&>(static_cast<const ImrMask&>(*this)[__n]);;
 }
 const imch& ImrMask::operator[](const size_t __n) const{
     return this->mask[__n];
@@ -122,7 +122,7 @@ ImrMask ImrMask::operator-(const ImrMask &p){
                         #####
 */
 imch& imgraw::operator[](const size_t __n){
-    return this->img_data[__n];
+    return const_cast<imch&>(static_cast<const imgraw&>(*this)[__n]);
 }
 const imch& imgraw::operator[](const size_t __n) const{
     return this->img_data[__n];

@@ -34,10 +34,8 @@ int main(int argc, char const *argv[]) {
             img_2.at2d(j,i)=img.at2d(j,i);
         }
     }
-    // cout << (int)img.random() << endl;
-    // const imch t = img.random();
-    img.test(img.random());
-    //---------------------------------------------------------
+    cout << "random-point=" << (int)img.random() << endl;
+    // ---------------------------------------------------------
     // ´£¥Ü°T®§
     img_2.info("img_2");
     //---------------------------------------------------------
