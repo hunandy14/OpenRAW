@@ -21,6 +21,26 @@ void imgraw::test(const imch & a){
 ```
 然後就是，為什麼 const 版本的函式怎麼樣都不會執行QQ
 
+> 2017/02/21解答：  
+> 因為宣告的類別是非const屬性的只會呼叫非const屬性  
+> `imgraw a();`  
+> `const imgraw a();`  
+> 
+> c++新特性有一個可以強制解除const屬性  
+> `const_cast<>`
+> 
+> 利用這點解決這個問題把主代碼寫在const屬性裡  
+> 
+> #### 解法
+> 讓 非const版本 的強制去呼叫 const版本的  
+> `static_cast<const class&>(*this)`
+> 
+> 然後再強制解除 const 屬性  
+> `const_cast<typename&>`
+> 
+> 就可以整合成一份主代碼了 
+> 
+> [[問題] 重載下標符號 const 用途](https://www.ptt.cc/bbs/C_and_CPP/M.1487584989.A.308.html) 
 
 ## 20161013
 ### 方法裡面不應該存在模擬兩可
