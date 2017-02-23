@@ -7,9 +7,10 @@ updata
 4. []使用繼承，寫太多次at2d()而且資料結構都一樣
 5. []htg可選擇幾等分
 6. [v]htg加印極值
-7. [v]優化setMasksize
+7. [v]優化 setMasksize (給定預設值3x3忘記改也不會出事)
 8. [v]新增pri_blk()
-9. []優化oper+效能
+9. [v]優化 ImrCoor oper四則 運算效能
+9. []新增 ImrCoor oper四則= 運算
 
 ---
 

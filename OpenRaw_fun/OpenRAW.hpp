@@ -50,10 +50,15 @@ namespace imr{
         ImrCoor(int y, int x);
         void info();
         // 重載運算子
-        ImrCoor operator+(const ImrCoor &p);
-        ImrCoor operator-(const ImrCoor &p);
-        ImrCoor operator*(const ImrCoor &p);
-        ImrCoor operator/(const ImrCoor &p);
+        friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
+        friend ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs);
+        friend ImrCoor operator*(ImrCoor const &lhs, ImrCoor const &rhs);
+        friend ImrCoor operator/(ImrCoor const &lhs, ImrCoor const &rhs);
+        ImrCoor & operator+=(const ImrCoor &rhs);
+        ImrCoor & operator-=(const ImrCoor &rhs);
+        ImrCoor & operator*=(const ImrCoor &rhs);
+        ImrCoor & operator/=(const ImrCoor &rhs);
+    public:
         int y;
         int x;
     };

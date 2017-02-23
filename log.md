@@ -2,6 +2,14 @@
 ===
 
 ## 20170223
+### 為什麼要加friend
+```cpp
+friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
+```
+
+不寫的話如果這個定義不是寫在開頭，而是寫在底下，或拆檔會找不到該定義。
+
+
 ### 重載函式的問題
 發問：
 [[問題] const 位於 函式前 與 參數後 的意思](https://www.ptt.cc/bbs/C_and_CPP/M.1487782131.A.AAF.html)
@@ -16,6 +24,9 @@
 2. 重載+符號要寫在全域
 3. 重載+符號要內要直接呼叫+=函式
 4. 重載[]主代碼寫在 const 函式，非const函式強制呼叫 const 版本的並解除 const
+
+
+
 
 ## 20170220
 ### const 函數可以被整合嗎
@@ -58,6 +69,9 @@ void imgraw::test(const imch & a){
 > 就可以整合成一份主代碼了 
 > 
 > [[問題] 重載下標符號 const 用途](https://www.ptt.cc/bbs/C_and_CPP/M.1487584989.A.308.html) 
+
+
+
 
 ## 20161013
 ### 方法裡面不應該存在模擬兩可

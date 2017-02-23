@@ -16,29 +16,37 @@ namespace imr{
      ######   ##   ##  ##         ####    #####    #####   ##
 
 */
-ImrCoor ImrCoor::operator+(const ImrCoor &p){
-    ImrCoor temp(0, 0);
-    temp.y = this->y + p.y;
-    temp.x = this->x + p.x;
-    return temp;
+ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs){
+    return ImrCoor(lhs) += rhs;
 }
-ImrCoor ImrCoor::operator-(const ImrCoor &p){
-    ImrCoor temp(0, 0);
-    temp.y = this->y - p.y;
-    temp.x = this->x - p.x;
-    return temp;
+ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs){
+    return ImrCoor(lhs) -= rhs;
 }
-ImrCoor ImrCoor::operator*(const ImrCoor &p){
-    ImrCoor temp(0, 0);
-    temp.y = this->y * p.y;
-    temp.x = this->x * p.x;
-    return temp;
+ImrCoor operator*(ImrCoor const &lhs, ImrCoor const &rhs){
+    return ImrCoor(lhs) *= rhs;
 }
-ImrCoor ImrCoor::operator/(const ImrCoor &p){
-    ImrCoor temp(0, 0);
-    temp.y = (int)((double)this->y / (double)p.y);
-    temp.x = (int)((double)this->x / (double)p.x);
-    return temp;
+ImrCoor operator/(ImrCoor const &lhs, ImrCoor const &rhs){
+    return ImrCoor(lhs) /= rhs;
+}
+ImrCoor & ImrCoor::operator+=(const ImrCoor &rhs){
+    this->y += rhs.y;
+    this->x += rhs.x;
+    return *this;
+}
+ImrCoor & ImrCoor::operator-=(const ImrCoor &rhs){
+    this->y -= rhs.y;
+    this->x -= rhs.x;
+    return *this;
+}
+ImrCoor & ImrCoor::operator*=(const ImrCoor &rhs){
+    this->y *= rhs.y;
+    this->x *= rhs.x;
+    return *this;
+}
+ImrCoor & ImrCoor::operator/=(const ImrCoor &rhs){
+    this->y /= rhs.y;
+    this->x /= rhs.x;
+    return *this;
 }
 /*
      ######                     ##   ##                    ##
