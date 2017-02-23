@@ -1,5 +1,22 @@
 ﻿問題記錄檔
 ===
+
+## 20170223
+### 重載函式的問題
+發問：
+[[問題] const 位於 函式前 與 參數後 的意思](https://www.ptt.cc/bbs/C_and_CPP/M.1487782131.A.AAF.html)
+[[問題] 重載下標符號 const 用途](https://www.ptt.cc/bbs/C_and_CPP/M.1487584989.A.308.html)
+
+整理筆記：
+[C++ 重載 operator + , += 重複打兩次及效能問題](http://charlottehong.blogspot.com/2017/02/c-operator.html)
+[C++ 重載下標符號 const 與非 const 寫兩次整合成一次的辦法](http://charlottehong.blogspot.com/2017/02/c-const-const.html)
+
+重點：
+1. const位於函式名稱後方表示限制該函式的 *this
+2. 重載+符號要寫在全域
+3. 重載+符號要內要直接呼叫+=函式
+4. 重載[]主代碼寫在 const 函式，非const函式強制呼叫 const 版本的並解除 const
+
 ## 20170220
 ### const 函數可以被整合嗎
 ```cpp
