@@ -53,11 +53,11 @@ ImrCoor & ImrCoor::operator-=(int val){
 
 */
 
-imch& ImrMask::operator[](const size_t __n){
-    return const_cast<imch&>(static_cast<const ImrMask&>(*this)[__n]);;
+imch& ImrMask::operator[](const size_t idx){
+    return const_cast<imch&>(static_cast<const ImrMask&>(*this)[idx]);;
 }
-const imch& ImrMask::operator[](const size_t __n) const{
-    return this->mask[__n];
+const imch& ImrMask::operator[](const size_t idx) const{
+    return this->mask[idx];
 }
 ImrMask ImrMask::operator+(const ImrMask &p){
     // 獲得最大長度
@@ -123,11 +123,11 @@ ImrMask ImrMask::operator-(const ImrMask &p){
      ######   ##   ##       ##  ##        ### ##   ## ##
                         #####
 */
-imch& imgraw::operator[](const size_t __n){
-    return const_cast<imch&>(static_cast<const imgraw&>(*this)[__n]);
+imch& imgraw::operator[](const size_t idx){
+    return const_cast<imch&>(static_cast<const imgraw&>(*this)[idx]);
 }
-const imch& imgraw::operator[](const size_t __n) const{
-    return this->img_data[__n];
+const imch& imgraw::operator[](const size_t idx) const{
+    return this->img_data[idx];
 }
 imgraw imgraw::operator+(const imgraw &p){
     // 獲得最大長度

@@ -11,6 +11,7 @@ updata
 8. [v]新增pri_blk()
 9. [v]優化 ImrCoor oper+- 運算效能
 9. [v]新增 ImrCoor oper+-= 運算
+10. [v]將__n修正為idx
 
 ---
 

@@ -78,8 +78,8 @@ namespace imr{
         imch avg();
         imch median();
         // 重載運算子
-        imch & operator[](const size_t __n);
-        const imch & operator[](const size_t __n) const;
+        imch & operator[](const size_t idx);
+        const imch & operator[](const size_t idx) const;
         imch & at2d(size_t y, size_t x);
         const imch & at2d(size_t y, size_t x) const;
         ImrMask operator+(const ImrMask &p);
@@ -124,8 +124,8 @@ namespace imr{
     public: // histogram
         void pri_htg(string title);
     public: // 重載運算子
-        imch & operator[](const size_t __n);
-        const imch & operator[](const size_t __n) const;
+        imch & operator[](const size_t idx);
+        const imch & operator[](const size_t idx) const;
         imgraw operator+(const imgraw &p);
         imgraw operator+(const imch value);
         imgraw operator-(const imgraw &p);

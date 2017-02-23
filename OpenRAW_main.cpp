@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
     // ³æÂI¾Ş§@
     for(int j = 0; j < Pic_y; ++j){
         for(int i = 0; i < Pic_x; ++i){
-            // img2[j*(Pic_x)+i]=img[j*(Pic_x)+i];
+            // img_2[j*(Pic_x)+i]=img[j*(Pic_x)+i];
             img_2.at2d(j,i)=img.at2d(j,i);
         }
     }
