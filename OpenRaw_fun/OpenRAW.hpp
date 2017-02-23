@@ -52,16 +52,10 @@ namespace imr{
         // 重載運算子
         friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
         friend ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs);
-        friend ImrCoor operator*(ImrCoor const &lhs, ImrCoor const &rhs);
-        friend ImrCoor operator/(ImrCoor const &lhs, ImrCoor const &rhs);
         ImrCoor & operator+=(const ImrCoor &rhs);
         ImrCoor & operator-=(const ImrCoor &rhs);
-        ImrCoor & operator*=(const ImrCoor &rhs);
-        ImrCoor & operator/=(const ImrCoor &rhs);
         ImrCoor & operator+=(int val);
         ImrCoor & operator-=(int val);
-        ImrCoor & operator*=(int val);
-        ImrCoor & operator/=(int val);
     public:
         int y;
         int x;

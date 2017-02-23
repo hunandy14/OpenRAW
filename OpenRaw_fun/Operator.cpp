@@ -22,12 +22,6 @@ ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs){
 ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs){
     return ImrCoor(lhs) -= rhs;
 }
-ImrCoor operator*(ImrCoor const &lhs, ImrCoor const &rhs){
-    return ImrCoor(lhs) *= rhs;
-}
-ImrCoor operator/(ImrCoor const &lhs, ImrCoor const &rhs){
-    return ImrCoor(lhs) /= rhs;
-}
 ImrCoor & ImrCoor::operator+=(const ImrCoor &rhs){
     this->y += rhs.y;
     this->x += rhs.x;
@@ -38,16 +32,6 @@ ImrCoor & ImrCoor::operator-=(const ImrCoor &rhs){
     this->x -= rhs.x;
     return *this;
 }
-ImrCoor & ImrCoor::operator*=(const ImrCoor &rhs){
-    this->y *= rhs.y;
-    this->x *= rhs.x;
-    return *this;
-}
-ImrCoor & ImrCoor::operator/=(const ImrCoor &rhs){
-    this->y /= rhs.y;
-    this->x /= rhs.x;
-    return *this;
-}
 ImrCoor & ImrCoor::operator+=(int val){
     this->y += val;
     this->x += val;
@@ -56,16 +40,6 @@ ImrCoor & ImrCoor::operator+=(int val){
 ImrCoor & ImrCoor::operator-=(int val){
     this->y -= val;
     this->x -= val;
-    return *this;
-}
-ImrCoor & ImrCoor::operator*=(int val){
-    this->y *= val;
-    this->x *= val;
-    return *this;
-}
-ImrCoor & ImrCoor::operator/=(int val){
-    this->y /= val;
-    this->x /= val;
     return *this;
 }
 /*

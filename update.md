@@ -9,8 +9,8 @@ updata
 6. [v]htg加印極值
 7. [v]優化 setMasksize (給定預設值3x3忘記改也不會出事)
 8. [v]新增pri_blk()
-9. [v]優化 ImrCoor oper四則 運算效能
-9. [v]新增 ImrCoor oper四則= 運算
+9. [v]優化 ImrCoor oper+- 運算效能
+9. [v]新增 ImrCoor oper+-= 運算
 
 ---
 

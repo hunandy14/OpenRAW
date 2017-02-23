@@ -22,19 +22,15 @@ int main(int argc, char const *argv[]) {
     imgraw img(ImrSize(Pic_y, Pic_x));
     // 讀取檔案
     img.read(Pic_name_in);
-    // ImrCoor四則運算
+    // ImrCoor 加減運算
     ImrCoor p, p1(1, 2), p2(3, 4);
     p=p1+p2; p.info();
-    p=p1*p2; p.info();
     p=p1-p2; p.info();
-    p=p2/p1; p.info();
     cout << endl;
-
     p+=1; p.info();
     p-=1; p.info();
-    p*=2; p.info();
-    p/=2; p.info();
     cout << endl;
+
 
 
 
