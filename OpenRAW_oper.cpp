@@ -28,6 +28,14 @@ int main(int argc, char const *argv[]) {
     p=p1*p2; p.info();
     p=p1-p2; p.info();
     p=p2/p1; p.info();
+    cout << endl;
+
+    p+=1; p.info();
+    p-=1; p.info();
+    p*=2; p.info();
+    p/=2; p.info();
+    cout << endl;
+
 
 
     // 輸出檔案

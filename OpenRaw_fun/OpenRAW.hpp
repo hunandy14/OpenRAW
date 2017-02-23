@@ -58,6 +58,10 @@ namespace imr{
         ImrCoor & operator-=(const ImrCoor &rhs);
         ImrCoor & operator*=(const ImrCoor &rhs);
         ImrCoor & operator/=(const ImrCoor &rhs);
+        ImrCoor & operator+=(int val);
+        ImrCoor & operator-=(int val);
+        ImrCoor & operator*=(int val);
+        ImrCoor & operator/=(int val);
     public:
         int y;
         int x;
