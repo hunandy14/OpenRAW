@@ -16,10 +16,14 @@ Final: 2017/02/21
 #include <sstream>
 #include <cmath>
 #include <ctime>
+#include <bitset>
+#include <initializer_list>
 using namespace std;
 
 namespace imr{
     using imch=unsigned char;
+    #define one_level 256
+    #define one_byte 8
     /*
          ######                      #####     ##
            ##                       ##   ##
@@ -74,10 +78,12 @@ namespace imr{
     public:
         ImrMask(ImrSize masksize);
         ImrMask(ImrSize masksize, imch value);
+        ImrMask(initializer_list<imch> mask);
         void sort(size_t len, size_t start);
         void info(string name);
         imch avg();
         imch median();
+        imch median2();
     public:
         imch & at2d(size_t y, size_t x);
         const imch & at2d(size_t y, size_t x) const;
@@ -86,6 +92,8 @@ namespace imr{
         const imch & operator[](const size_t idx) const;
         ImrMask operator+(const ImrMask &p);
         ImrMask operator-(const ImrMask &p);
+        ImrMask & operator+=(const ImrMask &rhs);
+        ImrMask & operator-=(const ImrMask &rhs);
     private:
         vector<imch> mask;
         ImrSize masksize;
@@ -103,8 +111,6 @@ namespace imr{
     class imgraw {
     public: // 建構子
         imgraw(ImrSize size);
-        // const size_t one_byte=8;
-        #define one_byte 256
     public: // imgraw
         void read(string filename);
         void write(string filename);

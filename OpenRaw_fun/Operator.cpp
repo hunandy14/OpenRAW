@@ -78,9 +78,8 @@ ImrMask ImrMask::operator+(const ImrMask &p){
             double num = (double)this->at2d(j, i)
                 + (double)p.at2d(j, i);
             if (num > (double)255){
-                temp.at2d(j, i) = (imch)255;
-            }
-            else{
+                temp.at2d(j, i) = 255;
+            } else{
                 temp.at2d(j, i) = (*this)[i]+p[i];
             }
         }
@@ -105,8 +104,7 @@ ImrMask ImrMask::operator-(const ImrMask &p){
                 - (double)p.at2d(j, i);
             if (num < (double)0){
                 temp.at2d(j, i) = (imch)0;
-            }
-            else{
+            } else{
                 temp.at2d(j, i) = (*this)[i]-p[i];
             }
         }

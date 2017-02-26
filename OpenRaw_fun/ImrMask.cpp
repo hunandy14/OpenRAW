@@ -65,4 +65,12 @@ imch ImrMask::median(){
     this->sort();
     return (*this)[idx];
 }
+imch ImrMask::median2(){
+    imch temp(0);
+    auto bit = [&](size_t idx){
+        return static_cast<bitset<one_byte>>(mask[idx]);
+    };
+    cout << "bit = " << bit(0) << endl;
+    return temp;
+}
 } //imr

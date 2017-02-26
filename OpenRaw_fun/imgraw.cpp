@@ -215,7 +215,7 @@ void imgraw::pri_htg(string title=""){
     this->histogram();
     // 溃罽计沮
     size_t epart=32; // 溃罽碭单だ(蔼)
-    double piece=one_byte/epart; // 单
+    double piece=one_level/epart; // 单
     size_t htg_comp[epart]{};
     for (unsigned j = 0; j < epart; ++j){
         for(unsigned i = 0; i < piece; ++i){

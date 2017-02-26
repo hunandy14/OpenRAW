@@ -37,6 +37,14 @@ int main(int argc, char const *argv[]) {
     cout << "avg=" << (int)mask.avg() << endl;
     // 取中值
     cout << "median=" << (int)mask.median() << endl;
+    
+    ImrMask a{
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9
+    };
+    a.median2();
+    a.info("a");
     //---------------------------------------------------------
     // 提示訊息
     img.info("img");

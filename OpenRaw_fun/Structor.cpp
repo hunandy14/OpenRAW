@@ -26,6 +26,10 @@ ImrMask::ImrMask(ImrSize masksize, imch value)
     for(auto&& i : this->mask)
     	i=value;
 }
+ImrMask::ImrMask(initializer_list<imch> mask): mask(mask){
+	size_t len=sqrt(mask.size());
+	masksize=ImrSize(len, len);
+}
 // imgraw建構子
 imgraw::imgraw(ImrSize size)
 : width(size.width), high(size.high), 
