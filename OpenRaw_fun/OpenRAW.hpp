@@ -77,25 +77,25 @@ namespace imr{
     class ImrMask{
     public:
         ImrMask(ImrSize masksize);
-        ImrMask(ImrSize masksize, imch value);
-        ImrMask(initializer_list<imch> mask);
+        ImrMask(ImrSize masksize, int value);
+        ImrMask(initializer_list<int> mask);
         void sort(size_t len, size_t start);
         void info(string name);
-        imch avg();
-        imch median();
-        imch median2();
+        int avg();
+        int median();
+        int median2();
     public:
-        imch & at2d(size_t y, size_t x);
-        const imch & at2d(size_t y, size_t x) const;
+        int & at2d(size_t y, size_t x);
+        const int & at2d(size_t y, size_t x) const;
     public: // 重載運算子
-        imch & operator[](const size_t idx);
-        const imch & operator[](const size_t idx) const;
+        int & operator[](const size_t idx);
+        const int & operator[](const size_t idx) const;
         ImrMask operator+(const ImrMask &p);
         ImrMask operator-(const ImrMask &p);
         ImrMask & operator+=(const ImrMask &rhs);
         ImrMask & operator-=(const ImrMask &rhs);
     private:
-        vector<imch> mask;
+        vector<int> mask;
         ImrSize masksize;
     };
     /*

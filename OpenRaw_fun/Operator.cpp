@@ -53,10 +53,10 @@ ImrCoor & ImrCoor::operator-=(int val){
 
 */
 
-imch& ImrMask::operator[](const size_t idx){
-    return const_cast<imch&>(static_cast<const ImrMask&>(*this)[idx]);;
+int & ImrMask::operator[](const size_t idx){
+    return const_cast<int&>(static_cast<const ImrMask&>(*this)[idx]);
 }
-const imch& ImrMask::operator[](const size_t idx) const{
+const int & ImrMask::operator[](const size_t idx) const{
     return this->mask[idx];
 }
 ImrMask ImrMask::operator+(const ImrMask &p){

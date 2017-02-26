@@ -21,12 +21,12 @@ ImrMask::ImrMask(ImrSize masksize)
 : mask(masksize.high * masksize.width), masksize(masksize){
 
 }
-ImrMask::ImrMask(ImrSize masksize, imch value)
+ImrMask::ImrMask(ImrSize masksize, int value)
 : mask(masksize.high * masksize.width), masksize(masksize){
     for(auto&& i : this->mask)
     	i=value;
 }
-ImrMask::ImrMask(initializer_list<imch> mask): mask(mask){
+ImrMask::ImrMask(initializer_list<int> mask): mask(mask){
 	size_t len=sqrt(mask.size());
 	masksize=ImrSize(len, len);
 }

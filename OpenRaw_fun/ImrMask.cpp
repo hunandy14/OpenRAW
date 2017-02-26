@@ -17,8 +17,8 @@ namespace imr{
 */
 // 排序陣列(長度，起始點)
 void ImrMask::sort(size_t len=0, size_t start=0) {
-    imch temp;
-    imch* arr = &this->mask[start];
+    int temp;
+    int* arr = &this->mask[start];
     // 長度為0時自動選全部
     if (len == 0)
         len = this->masksize.high*this->masksize.width;
@@ -31,11 +31,11 @@ void ImrMask::sort(size_t len=0, size_t start=0) {
     }
 }
 // 以二維方式讀取或寫入
-imch& ImrMask::at2d(size_t y, size_t x){
-    size_t pos = (y*this->masksize.width) + x;
-    return this->mask[pos];
+int& ImrMask::at2d(size_t y, size_t x){
+    return const_cast<int&>(
+        static_cast<const ImrMask&>(*this).at2d(y, x));
 }
-const imch& ImrMask::at2d(size_t y, size_t x) const{
+const int& ImrMask::at2d(size_t y, size_t x) const{
     size_t pos = (y*this->masksize.width) + x;
     return this->mask[pos];
 }
@@ -49,15 +49,15 @@ void ImrMask::info(string name=""){
     }cout << endl;
 }
 // 取得平均值
-imch ImrMask::avg(){
+int ImrMask::avg(){
     double long temp=0;
     size_t len=this->masksize.high * this->masksize.width;
     for (unsigned i = 0; i < len; ++i)
         temp += (double)(*this)[i];
-    return (imch)((temp/len)+0.5);
+    return (int)((temp/len)+0.5);
 }
 // 取得中值
-imch ImrMask::median(){
+int ImrMask::median(){
     size_t len=this->masksize.high * this->masksize.width;
     if(len==0)
         return 0;
@@ -65,8 +65,8 @@ imch ImrMask::median(){
     this->sort();
     return (*this)[idx];
 }
-imch ImrMask::median2(){
-    imch temp(0);
+int ImrMask::median2(){
+    int temp(0);
     auto bit = [&](size_t idx){
         return static_cast<bitset<one_byte>>(mask[idx]);
     };
