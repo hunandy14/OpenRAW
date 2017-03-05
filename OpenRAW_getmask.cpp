@@ -47,7 +47,7 @@ int main(int argc, char const *argv[]) {
     };
     a.info("initializer_list");
     // 取中值2
-    // cout << "a.median2() = " << a.median2() << endl;
+    cout << "a.median2() = " << a.median2() << endl;
     //---------------------------------------------------------
     // 提示訊息
     img.info("img");
