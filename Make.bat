@@ -9,7 +9,7 @@ set project=OpenRAW
 set folder=%OneDrive%\Git Repository\%project%
 ::=========================================================================
 ::檔案名稱 - 多檔編譯(自動補上".cpp")
-set main=OpenRAW_histogram
+set main=OpenRAW_getmask
 set file0=
 set file1=
 set file2=
