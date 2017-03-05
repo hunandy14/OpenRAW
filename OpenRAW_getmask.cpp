@@ -36,9 +36,10 @@ int main(int argc, char const *argv[]) {
     mask.sort();
     mask.info("sort");
     // 取平均值
-    cout << "avg = " << (int)mask.avg() << endl;
+    cout << "avg = " << mask.avg() << endl;
     // 取中值
-    cout << "median = " << (int)mask.median() << endl;
+    cout << "median = " << mask.median() << endl;
+    // cout << "a.median2() = " << mask.median2() << endl;
     // 初值陣列
     ImrMask a{
         1, 2, 3, 
