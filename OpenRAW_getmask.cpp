@@ -2,7 +2,7 @@
 Name : OpenRAW_getmask 說明範例
 Date : 2016/10/04
 By   : CharlotteHonG
-Final: 2017/02/21
+Final: 2017/03/05
 **********************************************************/
 #include <iostream>
 #include "OpenRAW_fun\OpenRAW.hpp"
@@ -39,16 +39,31 @@ int main(int argc, char const *argv[]) {
     cout << "avg = " << mask.avg() << endl;
     // 取中值
     cout << "median = " << mask.median() << endl;
-    // cout << "a.median2() = " << mask.median2() << endl;
     // 初值陣列
     ImrMask a{
-        1, 2, 3, 
-        4, 5, 6, 
+        1, 2, 3,
+        4, 5, 6,
         7, 8, 9
     };
     a.info("initializer_list");
-    // 取中值2
-    cout << "a.median2() = " << a.median2() << endl;
+    // 重設大小
+    ImrMask b{
+        1, 2,
+        3, 4,
+    };
+    b.resize(ImrSize(3, 3)).info("resize");
+    // 相加
+    a=a+b;
+    a.info("a+b");
+    // 加等於
+    ImrMask c{
+        255, 255,
+        255, -2,
+    };
+    c+=1;
+    c.info("c+=1");
+    // 修復數據
+    c.fixval().info("fixval()");
     //---------------------------------------------------------
     // 提示訊息
     img.info("img");

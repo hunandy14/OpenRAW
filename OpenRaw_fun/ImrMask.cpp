@@ -2,7 +2,7 @@
 Name : ImrMask 實作
 Date : 2016/10/03
 By   : CharlotteHonG
-Final: 2016/10/13
+Final: 2017/03/05
 **********************************************************/
 #include "OpenRAW.hpp"
 namespace imr{
@@ -39,6 +39,26 @@ const int& ImrMask::at2d(size_t y, size_t x) const{
     size_t pos = (y*this->masksize.width) + x;
     return this->mask[pos];
 }
+// 重設大小
+ImrMask & ImrMask::resize(ImrSize masksize){
+    ImrMask temp(masksize);
+    for(unsigned j = 0; j < this->masksize.high; ++j) {
+        for(unsigned i = 0; i < this->masksize.width; ++i) {
+            temp.at2d(j, i) = (*this).at2d(j, i);
+        }
+    } (*this) = temp;
+    return (*this);
+}
+ImrMask & ImrMask::fixval(){
+    for(auto&& i : this->mask) {
+        if(i > 255) {
+            i = 255;
+        } else if(i < 0) {
+            i = 0;
+        }
+    }
+    return (*this);
+}
 // 印出資訊
 void ImrMask::info(string name=""){
     cout << name << endl;
@@ -60,7 +80,7 @@ int ImrMask::avg(){
 int ImrMask::median(){
     size_t len=this->masksize.high * this->masksize.width;
     if(len==0 or len%2 != 1) {
-        cout << "  **Error Even or Len is Zero." << endl;
+        cout << "  **Error! Even or Len is Zero." << endl;
         return -1;
     }
     size_t idx=floor(len/2);
@@ -71,7 +91,7 @@ int ImrMask::median(){
 int ImrMask::median2(){
     size_t len = this->masksize.high * this->masksize.width;
     if(len==0 or len%2 != 1) {       
-        cout << "  **Error Even or Len is Zero." << endl;
+        cout << "  **Error! Even or Len is Zero." << endl;
         return -1;
     }
     // 複製遮罩內容
@@ -79,7 +99,7 @@ int ImrMask::median2(){
     vector<bool> list(len);
     for(unsigned i = 0; i < len; ++i) {
         if((*this)[i] < 0) {
-            cout << "  **Error Negative" << endl;
+            cout << "  **Error! Negative" << endl;
             return -1;
         }
         bit[i] = (*this)[i];

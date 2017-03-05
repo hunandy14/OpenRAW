@@ -1,8 +1,8 @@
-ï»¿/**********************************************************
-Name : é‹ç®—å­é‡è¼‰
+/**********************************************************
+Name : ß\Ëã×ÓÖØİd
 Date : 2016/10/03
 By   : CharlotteHonG
-Final: 2016/10/13
+Final: 2017/03/05
 **********************************************************/
 #include "OpenRAW.hpp"
 namespace imr{
@@ -52,64 +52,57 @@ ImrCoor & ImrCoor::operator-=(int val){
      ######   ##   ##  ##       ##   ##   ### ##  #####    ##  ##
 
 */
-
+// ÖØİdÏÂ˜Ë·ûÌ–
 int & ImrMask::operator[](const size_t idx){
     return const_cast<int&>(static_cast<const ImrMask&>(*this)[idx]);
 }
 const int & ImrMask::operator[](const size_t idx) const{
     return this->mask[idx];
 }
-ImrMask ImrMask::operator+(const ImrMask &p){
-    // ç²å¾—æœ€å¤§é•·åº¦
-    size_t y_max = this->masksize.high>p.masksize.high?
-                this->masksize.high: p.masksize.high;
-    size_t x_max = this->masksize.width>p.masksize.width?
-                this->masksize.width: p.masksize.width;
-    // ç²å¾—æœ€å°é•·åº¦
-    size_t y_min = this->masksize.high<p.masksize.high? 
-                this->masksize.high: p.masksize.high;
-    size_t x_min = this->masksize.width<p.masksize.width?
-                this->masksize.width: p.masksize.width;
-    // å‰µå»ºæš«å­˜å½±åƒ
-    ImrMask temp(ImrSize(y_max, x_max));
-    // å–®é»ç›¸åŠ 
-    for (int j = 0; j < (int)y_min; ++j){
-        for (int i = 0; i < (int)x_min; ++i){
-            double num = (double)this->at2d(j, i)
-                + (double)p.at2d(j, i);
-            if (num > (double)255){
-                temp.at2d(j, i) = 255;
-            } else{
-                temp.at2d(j, i) = (*this)[i]+p[i];
-            }
-        }
-    }
-    return temp;
+// ÖØİd¼Óœp·ûÌ–
+ImrMask operator+(ImrMask const &lhs, ImrMask const &rhs){
+    return ImrMask(lhs) += rhs;
 }
-ImrMask ImrMask::operator-(const ImrMask &p){
-    // ç²å¾—æœ€å¤§é•·åº¦
-    size_t y_max = this->masksize.high>p.masksize.high?
-                this->masksize.high: p.masksize.high;
-    size_t x_max = this->masksize.width>p.masksize.width?
-                this->masksize.width: p.masksize.width;
-    // ç²å¾—æœ€å°é•·åº¦
-    size_t y_min = this->masksize.high<p.masksize.high? this->masksize.high: p.masksize.high;
-    size_t x_min = this->masksize.width<p.masksize.width? this->masksize.width: p.masksize.width;
-    // å‰µå»ºæš«å­˜å½±åƒ
-    ImrMask temp(ImrSize(y_max, x_max));
-    // å–®é»ç›¸åŠ 
-    for (int j = 0; j < (int)y_min; ++j){
-        for (int i = 0; i < (int)x_min; ++i){
-            double num = (double)this->at2d(j, i)
-                - (double)p.at2d(j, i);
-            if (num < (double)0){
-                temp.at2d(j, i) = (imch)0;
-            } else{
-                temp.at2d(j, i) = (*this)[i]-p[i];
-            }
-        }
+ImrMask operator-(ImrMask const &lhs, ImrMask const &rhs){
+    return ImrMask(lhs) -= rhs;
+}
+ImrMask & ImrMask::operator+=(const ImrMask &rhs){
+    // ÅĞ¶¨´óĞ¡ÊÇ·ñÎÇºÏ
+    if(this->masksize.high != rhs.masksize.high
+        or this->masksize.width != rhs.masksize.width)
+    {
+        cout << "  **Error! Invalid size" << endl;
+        return (*this);
     }
-    return temp;
+    size_t len=this->masksize.high * this->masksize.width;
+    for(unsigned i = 0; i < len; ++i)
+        (*this)[i] += rhs[i];
+    return (*this);
+}
+ImrMask & ImrMask::operator-=(const ImrMask &rhs){
+    // ÅĞ¶¨´óĞ¡ÊÇ·ñÎÇºÏ
+    if(this->masksize.high != rhs.masksize.high
+        or this->masksize.width != rhs.masksize.width)
+    {
+        cout << "  **Error! Invalid size" << endl;
+        return (*this);
+    }
+    size_t len=this->masksize.high * this->masksize.width;
+    for(unsigned i = 0; i < len; ++i)
+        (*this)[i] -= rhs[i];
+    return (*this);
+}
+ImrMask & ImrMask::operator+=(const int & rhs){
+    size_t len=this->masksize.high * this->masksize.width;
+    for(unsigned i = 0; i < len; ++i)
+        (*this)[i] += rhs;
+    return (*this);
+}
+ImrMask & ImrMask::operator-=(const int & rhs){
+    size_t len=this->masksize.high * this->masksize.width;
+    for(unsigned i = 0; i < len; ++i)
+        (*this)[i] -= rhs;
+    return (*this);
 }
 /*
        ##
@@ -121,21 +114,23 @@ ImrMask ImrMask::operator-(const ImrMask &p){
      ######   ##   ##       ##  ##        ### ##   ## ##
                         #####
 */
+// ÖØİdÏÂ˜Ë·ûÌ–
 imch& imgraw::operator[](const size_t idx){
     return const_cast<imch&>(static_cast<const imgraw&>(*this)[idx]);
 }
 const imch& imgraw::operator[](const size_t idx) const{
     return this->img_data[idx];
 }
+// ÖØİd¼Óœp·ûÌ–
 imgraw imgraw::operator+(const imgraw &p){
-    // ç²å¾—æœ€å¤§é•·åº¦
+    // «@µÃ×î´óéL¶È
     size_t y = this->high>p.high? this->high: p.high;
     size_t x = this->width>p.width? this->width: p.width;
-    // å‰µå»ºæš«å­˜å½±åƒ
+    // „“½¨•º´æÓ°Ïñ
     imgraw temp(ImrSize(y, x));
-    // å–å¾—å½±åƒç¸½åƒç´ 
+    // È¡µÃÓ°Ïñ¿‚ÏñËØ
     int len = (int)this->high * (int)this->width;
-    // å–®é»ç›¸åŠ 
+    // †ÎücÏà¼Ó
     for (int i = 0; i < len; ++i){
         if ((double)(*this)[i]+(double)p[i] > (double)255){
             temp[i] = (imch)255;
@@ -147,14 +142,14 @@ imgraw imgraw::operator+(const imgraw &p){
     return temp;
 }
 imgraw imgraw::operator+(const imch value){
-    // ç²å¾—æœ€å¤§é•·åº¦
+    // «@µÃ×î´óéL¶È
     size_t y = this->high;
     size_t x = this->width;
-    // å‰µå»ºæš«å­˜å½±åƒ
+    // „“½¨•º´æÓ°Ïñ
     imgraw temp(ImrSize(y, x));
-    // å–å¾—å½±åƒç¸½åƒç´ 
+    // È¡µÃÓ°Ïñ¿‚ÏñËØ
     int len = (int)this->high * (int)this->width;
-    // å–®é»ç›¸åŠ 
+    // †ÎücÏà¼Ó
     for (int i = 0; i < len; ++i){
         if ((double)(*this)[i]+value > (double)255){
             temp[i] = (imch)255;
@@ -166,14 +161,14 @@ imgraw imgraw::operator+(const imch value){
     return temp;
 }
 imgraw imgraw::operator-(const imgraw &p){
-    // ç²å¾—æœ€å¤§é•·åº¦
+    // «@µÃ×î´óéL¶È
     size_t y = this->high>p.high? this->high: p.high;
     size_t x = this->width>p.width? this->width: p.width;
-    // å‰µå»ºæš«å­˜å½±åƒ
+    // „“½¨•º´æÓ°Ïñ
     imgraw temp(ImrSize(y, x));
-    // å–å¾—å½±åƒç¸½åƒç´ 
+    // È¡µÃÓ°Ïñ¿‚ÏñËØ
     int len = (int)this->high * (int)this->width;
-    // å–®é»ç›¸æ¸›
+    // †ÎücÏàœp
     for (int i = 0; i < len; ++i){
         if ((double)(*this)[i]-(double)p[i] < 0){
             temp[i] = (imch)0;
@@ -185,14 +180,14 @@ imgraw imgraw::operator-(const imgraw &p){
     return temp;
 }
 imgraw imgraw::operator-(const imch value){
-    // ç²å¾—æœ€å¤§é•·åº¦
+    // «@µÃ×î´óéL¶È
     size_t y = this->high;
     size_t x = this->width;
-    // å‰µå»ºæš«å­˜å½±åƒ
+    // „“½¨•º´æÓ°Ïñ
     imgraw temp(ImrSize(y, x));
-    // å–å¾—å½±åƒç¸½åƒç´ 
+    // È¡µÃÓ°Ïñ¿‚ÏñËØ
     int len = (int)this->high * (int)this->width;
-    // å–®é»ç›¸åŠ 
+    // †ÎücÏà¼Ó
     for (int i = 0; i < len; ++i){
         if ((double)(*this)[i]-value < (double)0){
             temp[i] = (imch)0;

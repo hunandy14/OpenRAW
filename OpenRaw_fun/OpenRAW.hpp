@@ -1,8 +1,8 @@
 /**********************************************************
-Name : OpenRaw 2.7.1
+Name : OpenRaw 2.8.0
 Date : 2016/08/04
 By   : CharlotteHonG
-Final: 2017/02/21
+Final: 2017/03/05
 **********************************************************/
 #ifndef OPEN_RAW_HPP
 #define OPEN_RAW_HPP
@@ -79,6 +79,7 @@ namespace imr{
         ImrMask(ImrSize masksize);
         ImrMask(ImrSize masksize, int value);
         ImrMask(initializer_list<int> mask);
+    public:
         void sort(size_t len, size_t start);
         void info(string name);
         int avg();
@@ -87,15 +88,22 @@ namespace imr{
     public:
         int & at2d(size_t y, size_t x);
         const int & at2d(size_t y, size_t x) const;
+        ImrMask & resize(ImrSize masksize);
+        ImrMask & fixval();
     public: // 重載運算子
         int & operator[](const size_t idx);
         const int & operator[](const size_t idx) const;
-        ImrMask operator+(const ImrMask &p);
-        ImrMask operator-(const ImrMask &p);
+        // ImrMask operator+(const ImrMask &p);
+        // ImrMask operator-(const ImrMask &p);
+        friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
+        friend ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs);
         ImrMask & operator+=(const ImrMask &rhs);
         ImrMask & operator-=(const ImrMask &rhs);
+        ImrMask & operator+=(const int & rhs);
+        ImrMask & operator-=(const int & rhs);
     private:
         vector<int> mask;
+    public:
         ImrSize masksize;
     };
     /*
