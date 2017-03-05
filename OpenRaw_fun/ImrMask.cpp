@@ -1,5 +1,5 @@
-ï»¿/**********************************************************
-Name : ImrMask å¯¦ä½œ
+/**********************************************************
+Name : ImrMask ¹ê§@
 Date : 2016/10/03
 By   : CharlotteHonG
 Final: 2016/10/13
@@ -15,14 +15,14 @@ namespace imr{
      #  #    # #   #  #     # #    # #    # #   #
     ### #    # #    # #     # #    #  ####  #    #
 */
-// æ’åºé™£åˆ—(é•·åº¦ï¼Œèµ·å§‹é»)
+// ±Æ§Ç°}¦C(ªø«×¡A°_©lÂI)
 void ImrMask::sort(size_t len=0, size_t start=0) {
     int temp;
     int* arr = &this->mask[start];
-    // é•·åº¦ç‚º0æ™‚è‡ªå‹•é¸å…¨éƒ¨
+    // ªø«×¬°0®É¦Û°Ê¿ï¥ş³¡
     if (len == 0)
         len = this->masksize.high*this->masksize.width;
-    // æ’å…¥æ’åºæ³•
+    // ´¡¤J±Æ§Çªk
     for (int i=1, j; i<(int)len; i++) {
         temp = arr[i];
         for (j=i-1; j>=0 && arr[j]>temp; j--)
@@ -30,7 +30,7 @@ void ImrMask::sort(size_t len=0, size_t start=0) {
         arr[j + 1] = temp;
     }
 }
-// ä»¥äºŒç¶­æ–¹å¼è®€å–æˆ–å¯«å…¥
+// ¥H¤Gºû¤è¦¡Åª¨ú©Î¼g¤J
 int& ImrMask::at2d(size_t y, size_t x){
     return const_cast<int&>(
         static_cast<const ImrMask&>(*this).at2d(y, x));
@@ -39,16 +39,16 @@ const int& ImrMask::at2d(size_t y, size_t x) const{
     size_t pos = (y*this->masksize.width) + x;
     return this->mask[pos];
 }
-// å°å‡ºè³‡è¨Š
+// ¦L¥X¸ê°T
 void ImrMask::info(string name=""){
     cout << name << endl;
     for (unsigned j = 0; j < masksize.high; ++j){
         for (unsigned i = 0; i < masksize.width; ++i){
-            cout << setw(4) << (size_t)this->at2d(j, i);
+            cout << setw(4) << this->at2d(j, i);
         }cout << endl;
     }cout << endl;
 }
-// å–å¾—å¹³å‡å€¼
+// ¨ú±o¥­§¡­È
 int ImrMask::avg(){
     double long temp=0;
     size_t len=this->masksize.high * this->masksize.width;
@@ -56,21 +56,81 @@ int ImrMask::avg(){
         temp += (double)(*this)[i];
     return (int)((temp/len)+0.5);
 }
-// å–å¾—ä¸­å€¼
+// ¨ú±o¤¤­È
 int ImrMask::median(){
     size_t len=this->masksize.high * this->masksize.width;
-    if(len==0)
-        return 0;
+    if(len==0 or len%2 != 1) {
+        cout << "  **Error Even or Len is Zero." << endl;
+        return -1;
+    }
     size_t idx=floor(len/2);
     this->sort();
     return (*this)[idx];
 }
+
 int ImrMask::median2(){
-    int temp(0);
-    auto bit = [&](size_t idx){
-        return static_cast<bitset<one_byte>>(mask[idx]);
+    size_t len = this->masksize.high * this->masksize.width;
+    if(len==0 or len%2 != 1) {       
+        cout << "  **Error Even or Len is Zero." << endl;
+        return -1;
+    }
+    // ½Æ»s¾B¸n¤º®e
+    vector<bitset<one_byte>> bit(len);
+    vector<bool> list(len);
+    for(unsigned i = 0; i < len; ++i) {
+        if((*this)[i] < 0) {
+            cout << "  **Error Negative" << endl;
+            return -1;
+        }
+        bit[i] = (*this)[i];
+        // cout << "bit = " << bit[i] << endl;
+    }
+    // ¦h¼Æ¨M (ªğ¦^¦h¼Æ)
+    auto&& maj = [&](size_t idx){
+        idx = one_byte-idx-1;
+        int temp=0;
+        for(unsigned i = 0; i < len; ++i) {
+            if(bit[i][idx]==1) {
+                ++temp;
+            } else if (bit[i][idx]==0){
+                --temp;
+            }
+        } return temp>0? 1:0;
     };
-    cout << "bit = " << bit(0) << endl;
-    return temp;
+    // ¶ñ¥R
+    auto&& fill = [&](size_t idx){
+        bool val = maj(idx);
+        idx = one_byte-idx-1;
+        for(unsigned i = 0; i < len; ++i) {
+            // ««ª½´M§ä»P¦h¼Æ¤£¤@¼ËªÌ(³Q²^¨O)
+            if(bit[i][idx] != val) {
+                // cout << i << "!=val";
+                // ¤£¤@¼ËªÌ¦pªG¬°1«h¥ş¶ñ¤J1
+                if(val != true and list[i]==false) {
+                    // cout << "---fill";
+                    bit[i].set();
+                } else if(val != false and list[i]==false){
+                    // cout << "---fill";
+                    bit[i].reset();
+                }
+                // ¬ö¿ı¤w¶ñ¹Lªº
+                list[i] = true;
+                // cout << endl;
+            }
+        }
+    };
+    // ¶ñ¥R¥ş³¡¨Ã¨ú­È
+    auto&& median_num = [&](){
+        for(unsigned i = 0; i < len; ++i) {
+            fill(i);
+        }
+        for(unsigned i = 0; i < len; ++i) {
+            if(list[i] == false) {
+                return (int)i;
+            }
+        }
+        return -1;
+    };
+    return (*this)[median_num()];
 }
 } //imr

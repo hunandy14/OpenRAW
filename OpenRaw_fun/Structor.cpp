@@ -24,18 +24,17 @@ ImrMask::ImrMask(ImrSize masksize)
 ImrMask::ImrMask(ImrSize masksize, int value)
 : mask(masksize.high * masksize.width), masksize(masksize){
     for(auto&& i : this->mask)
-    	i=value;
+        i=value;
 }
 ImrMask::ImrMask(initializer_list<int> mask): mask(mask){
-	size_t len=sqrt(mask.size());
-	masksize=ImrSize(len, len);
+    size_t len=sqrt(mask.size());
+    masksize=ImrSize(len, len);
 }
 // imgraw建構子
 imgraw::imgraw(ImrSize size)
 : width(size.width), high(size.high), 
 img_data(size.width*size.high), filesize(size.width*size.high),
 masksize(ImrSize(3, 3)) {
-	// 初始化亂數種子
-    srand((unsigned)time(NULL)); rand();
+
 }
 } //imr

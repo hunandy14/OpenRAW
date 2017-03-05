@@ -18,33 +18,36 @@ using namespace imr;
 #define Pic_y 256
 
 int main(int argc, char const *argv[]) {
+    // 初始化亂數種子
+    srand((unsigned)time(NULL)); rand();
     // 創建畫布
     imgraw img(ImrSize(Pic_y, Pic_x));
     // 讀取檔案
     img.read(Pic_name_in);
     //---------------------------------------------------------
     // 設定遮罩(預設為3x3)
-    img.setMaskSize(ImrSize(4,4));
-    // 取得Mask陣列及排續 getMask(原點位置)
+    img.setMaskSize(ImrSize(3,3));
+    // 取得Mask陣列及排續 getMask(原點位置, 偏移位置(預設 -1, -1))
     ImrMask mask(img.getMask(ImrCoor(1,1)));
     mask.info("setMaskSize");
     // 原圖比較
-    img.pri_blk("Origin", ImrCoor(0, 0), ImrSize(4, 4));
+    img.pri_blk("Origin", ImrCoor(0, 0), ImrSize(3, 3));
     // 排序
     mask.sort();
     mask.info("sort");
     // 取平均值
-    cout << "avg=" << (int)mask.avg() << endl;
+    cout << "avg = " << (int)mask.avg() << endl;
     // 取中值
-    cout << "median=" << (int)mask.median() << endl;
-    
+    cout << "median = " << (int)mask.median() << endl;
+    // 初值陣列
     ImrMask a{
-        1, 2, 3,
-        4, 5, 6,
+        1, 2, 3, 
+        4, 5, 6, 
         7, 8, 9
     };
-    a.median2();
-    a.info("a");
+    a.info("initializer_list");
+    // 取中值2
+    // cout << "a.median2() = " << a.median2() << endl;
     //---------------------------------------------------------
     // 提示訊息
     img.info("img");

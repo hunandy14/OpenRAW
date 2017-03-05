@@ -19,6 +19,8 @@ using namespace imr;
 #define Pic_y 256
 
 int main(int argc, char const *argv[]) {
+    // 初始化亂數種子
+    srand((unsigned)time(NULL)); rand();
     // 創建畫布
     imgraw img(ImrSize(Pic_y, Pic_x));
     // imgraw img_2(ImrSize(Pic_y, Pic_x));
