@@ -22,7 +22,6 @@ void ImrMask::sort(size_t len=0, size_t start=0) {
         len = this->mask.size();
     // STL排序法
     std::sort(this->mask.begin()+start, this->mask.begin()+len);
-    // std::sort(this->mask.begin(), this->mask.end());
 }
 // 以二維方式讀取或寫入
 int& ImrMask::at2d(size_t y, size_t x){
