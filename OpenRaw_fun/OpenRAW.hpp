@@ -18,6 +18,7 @@ Final: 2017/03/05
 #include <ctime>
 #include <bitset>
 #include <initializer_list>
+#include <algorithm>
 using namespace std;
 
 namespace imr{

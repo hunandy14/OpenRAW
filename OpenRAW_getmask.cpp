@@ -28,10 +28,10 @@ int main(int argc, char const *argv[]) {
     // 設定遮罩(預設為3x3)
     img.setMaskSize(ImrSize(3,3));
     // 取得Mask陣列及排續 getMask(原點位置, 偏移位置(預設 -1, -1))
-    ImrMask mask(img.getMask(ImrCoor(1,1)));
+    ImrMask mask(img.getMask(ImrCoor(5,5)));
     mask.info("setMaskSize");
     // 原圖比較
-    img.pri_blk("Origin", ImrCoor(0, 0), ImrSize(3, 3));
+    img.pri_blk("Origin", ImrCoor(4, 4), ImrSize(3, 3));
     // 排序
     mask.sort();
     mask.info("sort");

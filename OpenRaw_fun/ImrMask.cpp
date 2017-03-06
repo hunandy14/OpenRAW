@@ -17,18 +17,12 @@ namespace imr{
 */
 // 排序陣列(長度，起始點)
 void ImrMask::sort(size_t len=0, size_t start=0) {
-    int temp;
-    int* arr = &this->mask[start];
     // 長度為0時自動選全部
     if (len == 0)
-        len = this->masksize.high*this->masksize.width;
-    // 插入排序法
-    for (int i=1, j; i<(int)len; i++) {
-        temp = arr[i];
-        for (j=i-1; j>=0 && arr[j]>temp; j--)
-            arr[j + 1] = arr[j];
-        arr[j + 1] = temp;
-    }
+        len = this->mask.size();
+    // STL排序法
+    std::sort(this->mask.begin()+start, this->mask.begin()+len);
+    // std::sort(this->mask.begin(), this->mask.end());
 }
 // 以二維方式讀取或寫入
 int& ImrMask::at2d(size_t y, size_t x){
