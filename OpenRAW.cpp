@@ -34,6 +34,7 @@ Final: 2017/02/14
 //=========================================================
 #include "OpenRAW_fun\imgraw.cpp"
 #include "OpenRAW_fun\imgraw_histogram.cpp"
+#include "OpenRAW_fun\imgraw_Mask.cpp"
 
 //=========================================================
 //------------------------Operator-------------------------
