@@ -1,5 +1,96 @@
 ﻿問題記錄檔
 ===
+## 20170319
+### 繼承後如何轉名
+父類別的資料成員原本叫做arr，我希望繼承後可以改用mask名稱操作
+
+一般可以用參考取別名，轉名醫開始使用 auto&
+
+```cpp
+auto& maks = arr;
+```
+
+貌似不行查了一下，還有另一個 `dedecltype(var)` 這個可行
+
+```cpp
+decltype(arr) & mask = arr;
+```
+
+查了一下找到這個
+http://tommyjswu-blog.logdown.com/posts/736924-c-11-mouth-cannon-auto
+
+理解是
+- auto 靜態
+- decltype 動態
+
+像是 template，你沒辦法在一開始就知道他是什麼用 auto 會查不出來
+
+ 
+## 20170317
+### 繼承downcast問題
+arr -> arr_int
+operator函式定義在arr
+
+```cpp
+arr_int a;
+a=a+a;
+```
+
+a+a 返還的型態是 arr 可是 arr_int 因為沒有寫所以編譯器自己補了一個
+
+```cpp
+arr_int & arr_int::operator=(arr_int const & rhs);
+```
+
+會導致 arr_int = arr 這種狀況找不到函式使用
+
+
+
+> 解決了，新增缺少的operator=()。並讓他呼叫原本的父類別的函式即可
+
+```cpp
+   Arr_int & operator=(Arr<int> const & rhs){
+       this->Arr<int>::operator=(rhs);
+       return (*this);
+   }
+```
+
+或是
+
+
+```cpp
+    Arr_uch & operator=(Arr<uch> const & rhs){
+        ((*static_cast<Arr<uch>*>(this)) = rhs);
+        return (*dynamic_cast<Arr_uch*>(this));
+    }
+```
+
+</br>
+
+### 記得如和增加const屬性與解除const屬性
+Caesar08 op[][] 裡面用了兩個類別來重載第二個括號
+兩個類別寫的內容完全一樣，想說能不能直接A繼承B或B繼承A
+
+可問題是一個有const 一個沒 const 該怎麼解決這個問題呢
+
+> 最後發現兩分代碼裡面根本就長的不一樣，沒有一樣的地方可以提出
+> 這個問題看起貌似不存在，僅是一開始沒看好誤會了
+> 
+> 在做繼承時應該看清楚裡些是完全一樣的，拉出來省得重打一次
+
+
+</br>
+
+### friend 函式
+- 如果該函式有多型宣告，則在friend前也要補上一樣的多型
+
+```cpp
+template <typename T1> friend
+    Arr<T1> Arr::operator+(Arr<T1> const &lhs, Arr<T1> const &rhs);
+```
+
+
+</br></br></br>
 
 ## 20170223
 ### 為什麼要加friend
@@ -27,6 +118,7 @@ friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
 
 
 
+</br></br></br>
 
 ## 20170220
 ### const 函數可以被整合嗎
@@ -72,6 +164,7 @@ void imgraw::test(const imch & a){
 
 
 
+</br></br></br>
 
 ## 20161013
 ### 方法裡面不應該存在模擬兩可
