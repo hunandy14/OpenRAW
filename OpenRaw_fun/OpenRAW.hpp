@@ -94,8 +94,6 @@ namespace imr{
     public: // 重載運算子
         int & operator[](const size_t idx);
         const int & operator[](const size_t idx) const;
-        // ImrMask operator+(const ImrMask &p);
-        // ImrMask operator-(const ImrMask &p);
         friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
         friend ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs);
         ImrMask & operator+=(const ImrMask &rhs);
@@ -140,6 +138,7 @@ namespace imr{
         ImrMask getMask(ImrCoor ori, ImrCoor shi);
     public: // histogram
         void pri_htg(string title);
+        void pri_htg2(string title);
     public: // 重載運算子
         imch & operator[](const size_t idx);
         const imch & operator[](const size_t idx) const;

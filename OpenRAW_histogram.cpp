@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
     img.read(Pic_name_in);
     //---------------------------------------------------------
     // 印出直方圖
-    img.pri_htg("Original");
+    img.pri_htg2("Original");
     //---------------------------------------------------------
     // 提示訊息
     img.info("img");
