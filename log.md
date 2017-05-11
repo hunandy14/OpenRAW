@@ -1,5 +1,141 @@
 問題記錄檔
 ===
+
+## 2017/03/24
+### 移動語意的大規則
+深度拷貝指的是實際複製`指針所指之處`的內容
+淺度拷貝指的是指複製`指針容器內的指針`
+> 淺度拷貝後A物件被更動B物件也會跟著被改變
+
+`std::move()` 意指針對`具移動函式的物件`起作用
+所謂的`具移動函式的物件`的指的是成員具備指標，且他的 `opertor=()`
+提供了深度拷貝與淺度拷貝重載，利用 `std::move()` 將可選擇調用淺度拷貝
+
+如果一個物件不具有移動函式，那麼有沒有使用std::move()結果將沒有區別
+> 因為 fun(const &T); 可以接收左右值
+
+右值引用在在引用後會變成左值，因為它具備名字了，所以要用`std::move()`轉回右值
+
+
+## 2017/03/23
+### 移動語意的真正用途
+這裡有一個超級大的坑，所有的教學文章都是在教已經會的人，都是以你知道什麼是移動語意，他應該怎麼做的前提下來教你，怎麼觸發移動語意，他們更著重於怎麼觸發，而不是移動語意是什麼該怎麼實現。
+> 這我是覺得很奇怪，也因此導致我找超久，最後還是依靠幸運找到答案的。
+
+
+移動語意真正是用在當你的類別具有指標成員的時候必須自己重載=成 `深度拷貝`
+但我們總是會用到 `淺度拷貝的` ，我們換個名詞來形容就是 `移動`
+再不發生深度拷貝的行為下，把資源從 a 弄到 b 不就是 `移動` 的意思了
+
+移動函式 `std::move()` 的原理是將他轉成右值引用，以便你區分不一樣的等號
+
+```cpp
+Arr & operator=(Arr<T> const & rhs);
+Arr & operator=(Arr<T> && rhs);
+```
+
+讓第一個等號做深度拷貝，讓第二個等號做淺度拷貝(移動)
+
+#### 此外
+經過 `std::move()` 的變數會被語法標記，標記已經不能用了
+但這只是標記而已並不代表真的不能，你還是可以存取，只不過會發生未指定行為
+
+##### 未指定行為
+編譯器可以根據`語言標準`所提供的行為，選擇要執行哪個行為
+> 不會炸且保證每次都一樣，但是有可能換一個編譯器得到不一樣的結果
+
+#####  為定義行為
+未定義行為則是完全看你運氣了，他就是存在那個會炸掉的機率，而且還很大。
+> 但如果你的程式寫的足夠多，或執行的足夠久，炸的機率接近100%。
+
+
+
+
+
+### 左右值與const的關係
+修正其實具備四種屬性
+- 左值 non-const
+- 左值 const
+- 右值 non-const
+- 右值 const
+
+只不過 `右值 const` 本身並沒有什麼用途，移動語意需要語法標記 const 可能會阻礙標記
+
+### 參考
+我看得第一篇很好的解釋了什麼是右值，但我還是不能明白什麼是移動語意
+[[译]详解C++右值引用](http://jxq.me/2012/06/06/%E8%AF%91%E8%AF%A6%E8%A7%A3c%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/)
+
+這一篇看完也什麼收穫，感覺跟第一篇一樣
+[C++11 标准新特性: 右值引用与转移语义](https://www.ibm.com/developerworks/cn/aix/library/1307_lisl_c11/)
+
+這篇讓我想到很多，補了很多知識，不過還沒想出解
+[关于C++右值及std::move()的疑问？](https://www.zhihu.com/question/50652989)
+
+上一篇連出來的，不過還是沒看懂QQ 很神奇
+[RVO V.S. std::move](https://www.ibm.com/developerworks/community/blogs/5894415f-be62-4bc0-81c5-3956e82276f3/entry/RVO_V_S_std_move?lang=en)
+
+這一篇使用了指標，讓我很有感覺，可是還是沒想到，這是想出來的主力。(這篇還有很多沒看懂)
+就是他提到了 unique_ptr 讓我她看懂，我才有可能在下一篇找到答案
+[详解C++11中移动语义(std::move)和完美转发(std::forward)](http://shaoyuan1943.github.io/2016/03/26/explain-move-forward/)
+
+微軟的示範文章，但那時候很多看不懂沒繼續看
+[移動建構函式和移動指派運算子 (C++)](https://msdn.microsoft.com/zh-tw/library/dd293665.aspx)
+
+這裡是關鍵，我看到了 unique_ptr 搭配上一篇忽然想到深度跟淺度拷貝的問題，終於想通了
+[搜索 "std::move() 有什麼用" 搜到的書](https://books.google.com.tw/books?id=SuX-AwAAQBAJ&pg=PA976&lpg=PA976&dq=std::move()+%E6%9C%89%E4%BB%80%E9%BA%BC%E7%94%A8&source=bl&ots=ArggA6OIRv&sig=31FAmHiEfFv_4u8Ty6SfZxK-X6k&hl=zh-TW&sa=X&ved=0ahUKEwintbKizurSAhUGKZQKHbuJDbMQ6AEIOjAE#v=onepage&q=std%3A%3Amove()%20%E6%9C%89%E4%BB%80%E9%BA%BC%E7%94%A8&f=false)
+
+
+
+## 2017/03/21
+### 研究什麼移動語意
+意外發現第三種屬性
+
+如果只重載
+
+```cpp
+Arr & operator=(Arr<T> & rhs);
+Arr & operator=(Arr<T> && rhs);
+```
+
+他會找不到
+
+```cpp
+const Arr a;
+```
+
+
+只重載
+
+```cpp
+Arr & operator=(Arr<T> const & rhs);
+```
+
+那麼無名右值也會被算進來這裡，就無法實現移動語意
+
+
+覺得左值又值，加上const應該是三種屬性
+- 左值 const
+- 左值 non-const
+- 右值 
+
+應該重載
+
+```cpp
+Arr & operator=(Arr<T> const & rhs);
+```
+
+負責左值的 const 與 non-const
+然後再重載
+
+```cpp
+Arr & operator=(Arr<T> && rhs);
+```
+
+負責右值，一直以為右值就是 const 貌似是個誤會
+
+?右值不是 const 也不是 non-const 就是無名指標
+這句話不知道對不對
+
 ## 20170319
 ### 繼承後如何轉名
 父類別的資料成員原本叫做arr，我希望繼承後可以改用mask名稱操作
