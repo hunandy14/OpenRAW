@@ -35,11 +35,11 @@ void imgraw::read(string filename) {
     // 取得總長
     img.open(this->filename, ios::in | ios::binary);
     img.seekg(0, ios::end);
-    this->filesize = img.tellg();
+    auto filesize = img.tellg();
     img.seekg(0, ios::beg);
     // 讀取值
-    this->img_data.vector::resize(this->filesize);
-    img.read((char*)&this->img_data[0], this->filesize);
+    this->img_data.vector::resize(filesize);
+    img.read((char*)&this->img_data[0], filesize);
     img.close();
 }
 // 將記憶體資料匯出
@@ -47,7 +47,7 @@ void imgraw::write(string filename) {
     // 進位模式寫檔
     fstream img_file;
     img_file.open(filename, ios::out | ios::binary);
-    img_file.write((char*)&img_data[0], this->filesize);
+    img_file.write((char*)&img_data[0], this->img_data.size());
     img_file.close();
 }
 // 以二維方式讀取或寫入(檢查邊界)
@@ -64,14 +64,12 @@ void imgraw::resize_canvas(size_t size) {
     this->width = 0;
     this->high = 0;
     this->img_data.vector::resize(size);
-    this->filesize = size;
 }
 void imgraw::resize_canvas(ImrSize size) {
     size_t y=size.high, x=size.width;
     this->width = x;
     this->high = y;
     this->img_data.vector::resize(x*y);
-    this->filesize = x*y;
 }
 // 印出畫布大小
 void imgraw::info(string name=""){
@@ -91,12 +89,18 @@ void imgraw::value(imch value){
     for(auto&& i : this->img_data)
         i = value;
 }
+// 圖片大小是否相同
+bool imgraw::check_size(imgraw const& rhs){
+    if(this->width==rhs.width and this->high==rhs.high) {
+        return 1;
+    } return 0;
+}
 // 隨機回傳一個點
 imch & imgraw::random(){
     return const_cast<imch&>(static_cast<const imgraw&>(*this).random());
 }
 const imch & imgraw::random() const{
-    int up=this->filesize, low=0;
+    int up=this->img_data.size(), low=0;
     size_t idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
     return (*this)[idx];
 }

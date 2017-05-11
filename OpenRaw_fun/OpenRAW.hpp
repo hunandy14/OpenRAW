@@ -37,6 +37,7 @@ namespace imr{
     class ImrSize{
     public:
         ImrSize(size_t y, size_t x);
+        friend bool operator==(const ImrSize& lhs, const ImrSize& rhs);
         void info();
     public:
         size_t high;
@@ -56,12 +57,12 @@ namespace imr{
         ImrCoor(int y, int x);
         void info();
         // 重載運算子
-        friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
-        friend ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs);
-        ImrCoor & operator+=(const ImrCoor &rhs);
-        ImrCoor & operator-=(const ImrCoor &rhs);
-        ImrCoor & operator+=(int val);
-        ImrCoor & operator-=(int val);
+        friend ImrCoor const operator+(ImrCoor const &lhs, ImrCoor const &rhs);
+        friend ImrCoor const operator-(ImrCoor const &lhs, ImrCoor const &rhs);
+        ImrCoor & operator+=(const ImrCoor & rhs);
+        ImrCoor & operator-=(const ImrCoor & rhs);
+        ImrCoor & operator+=(const int & val);
+        ImrCoor & operator-=(const int & val);
     public:
         int y;
         int x;
@@ -94,10 +95,10 @@ namespace imr{
     public: // 重載運算子
         int & operator[](const size_t idx);
         const int & operator[](const size_t idx) const;
-        friend ImrCoor operator+(ImrCoor const &lhs, ImrCoor const &rhs);
-        friend ImrCoor operator-(ImrCoor const &lhs, ImrCoor const &rhs);
-        ImrMask & operator+=(const ImrMask &rhs);
-        ImrMask & operator-=(const ImrMask &rhs);
+        friend ImrCoor const operator+(ImrCoor const &lhs, ImrCoor const &rhs);
+        friend ImrCoor const operator-(ImrCoor const &lhs, ImrCoor const &rhs);
+        ImrMask & operator+=(ImrMask const &rhs);
+        ImrMask & operator-=(ImrMask const &rhs);
         ImrMask & operator+=(const int & rhs);
         ImrMask & operator-=(const int & rhs);
     private:
@@ -128,6 +129,7 @@ namespace imr{
         void info(string name);
         void binarizae(imch value, imch high, imch low);
         void value(imch value);
+        bool check_size(imgraw const& rhs);
         imch & random();
         const imch & random() const;
         void pri_blk(string name, ImrCoor pos, ImrSize masksize);
@@ -135,22 +137,20 @@ namespace imr{
         void setMaskSize(ImrSize masksize);
         imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi);
         const imch & maskVal(ImrCoor ori, ImrCoor mas, ImrCoor shi) const;
-        ImrMask getMask(ImrCoor ori, ImrCoor shi);
+        const ImrMask getMask(ImrCoor ori, ImrCoor shi);
     public: // histogram
         void pri_htg(string title);
         void pri_htg2(string title);
     public: // 重載運算子
         imch & operator[](const size_t idx);
         const imch & operator[](const size_t idx) const;
-        imgraw operator+(const imgraw &p);
-        imgraw operator+(const imch value);
-        imgraw operator-(const imgraw &p);
-        imgraw operator-(const imch value);
+        imgraw & operator+=(int const& rhs);
+        imgraw & operator-=(int const& rhs);
     private: // 必要成員(建構)
         size_t width;
         size_t high;
         vector<imch> img_data;
-        ifstream::pos_type filesize;
+        // ifstream::pos_type filesize;
         ImrSize masksize;
     private: // 成員(函式)
         string filename;

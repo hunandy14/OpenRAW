@@ -6,8 +6,8 @@ Final: 2017/02/23
 *****************************************************************/
 #include <iostream>
 #include "OpenRAW_fun\OpenRAW.hpp"
-// Visual Studio ç·¨è­¯éœ€åˆªé™¤è©²è¡Œèˆ‡è©²æª”æ¡ˆ
-#include "OpenRAW.cpp" // GCCå–®æª”ç·¨è­¯ç”¨
+// Visual Studio ½sÄ¶»İ§R°£¸Ó¦æ»P¸ÓÀÉ®×
+#include "OpenRAW.cpp" // GCC³æÀÉ½sÄ¶¥Î
 using namespace std;
 using namespace imr;
 
@@ -18,11 +18,11 @@ using namespace imr;
 #define Pic_y 256
 
 int main(int argc, char const *argv[]) {
-    // å‰µå»ºç•«å¸ƒ
+    // ³Ğ«Øµe¥¬
     imgraw img(ImrSize(Pic_y, Pic_x));
-    // è®€å–æª”æ¡ˆ
+    // Åª¨úÀÉ®×
     img.read(Pic_name_in);
-    // ImrCoor åŠ æ¸›é‹ç®—
+    // ImrCoor ¥[´î¹Bºâ
     ImrCoor p, p1(1, 2), p2(3, 4);
     p=p1+p2; p.info();
     p=p1-p2; p.info();
@@ -30,13 +30,23 @@ int main(int argc, char const *argv[]) {
     p+=1; p.info();
     p-=1; p.info();
     cout << endl;
+    // imgraw ¾ã²z¼Æ­È¥[´î
+    img.pri_blk("img", ImrCoor(0, 0), ImrSize(4, 4));
+    img+=1;
+    img.pri_blk("img", ImrCoor(0, 0), ImrSize(4, 4));
+    img-=1;
+    img.pri_blk("img", ImrCoor(0, 0), ImrSize(4, 4));
+    // 
+    ImrSize a(4, 4);
+    ImrSize b(4, 4);
+    if(a==b) {
+        cout << "123" << endl;
+    }
 
 
-
-
-    // è¼¸å‡ºæª”æ¡ˆ
+    // ¿é¥XÀÉ®×
     img.write(Pic_name_out);
-    // é–‹å•Ÿæª”æ¡ˆ
+    // ¶}±ÒÀÉ®×
     if(AutoOpen==1)
         system(Pic_name_out);
     return 0;

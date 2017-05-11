@@ -54,7 +54,7 @@ void imgraw::setMaskSize(ImrSize masksize){
     this->masksize = masksize;
 }
 // 取得遮罩，回傳一維陣列(原點位置，位移維度)
-ImrMask imgraw::getMask(ImrCoor ori,
+const ImrMask imgraw::getMask(ImrCoor ori,
         ImrCoor shi = ImrCoor(-1,-1))
 {
     // 創建臨時遮罩
