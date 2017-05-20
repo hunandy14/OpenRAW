@@ -8,7 +8,6 @@ Final: 2017/03/10
 
 namespace imr {
 /*
-
     #    # #  ####  #####  ####   ####  #####    ##   #    #
     #    # # #        #   #    # #    # #    #  #  #  ##  ##
     ###### #  ####    #   #    # #      #    # #    # # ## #
@@ -45,72 +44,12 @@ void imgraw::histogram(){
     }
 }
 // 印出直方圖
-void imgraw::pri_htg2(string title=""){
-    // 取得數據統計
-    this->histogram();
-    // 壓縮數據
-    size_t epart=32; // 壓縮幾等分(上下)
-    double piece=one_level/epart; // 一等份範圍(左右)
-    size_t htg_comp[epart]{};
-    for (unsigned j = 0; j < epart; ++j){
-        for(unsigned i = 0; i < piece; ++i){
-            size_t idx = j*piece+i;
-            htg_comp[j] += htg_data[idx];
-        }
-    }
-    // 找最高值
-    size_t htg_high=0;
-    for (unsigned i = 0; i < epart; ++i)
-        if (htg_comp[i]>htg_high)
-            htg_high = htg_comp[i];
-    // 轉換等比(四捨五入)
-    double htg_rate[epart]{};
-    for (unsigned i = 0; i < epart; ++i){
-        htg_rate[i] = round((double)htg_comp[i]
-            / (double)htg_high*(double)epart);
-    }
-    // 轉換字串
-    string htg_str[epart][epart];
-    for (unsigned j = 0; j < epart; ++j)
-        for (unsigned i = 0; i < htg_rate[j]; ++i)
-            htg_str[j][i]+=" ▌";
-    // 取得最大值數的位數(左邊邊欄空格用)
-    string temp;
-    stringstream ss;
-    ss << htg_high;
-    temp.clear();
-    ss >> temp;
-    ss.clear();
-    // 印出
-    size_t space=3; // 圖形的間隔
-    cout << endl << setw((64-3)-(title.length()/2));
-    cout << title << endl;
-    for (int i = epart-1; i >= 0; --i){
-        // 左邊邊攔說明
-        cout << setw(temp.length())
-             << htg_high/epart*(i+1) << " ";
-        // 圖形
-        for (unsigned j = 0; j < epart; ++j)
-            cout << setw(space) <<htg_str[j][i];
-        cout << endl;
-    }
-    // 數據說明欄
-    for (unsigned i = 0; i < epart/2; ++i){
-        cout << setw(6) << (i+1)*16;
-    }cout << endl;
-    // 打印極值
-    this->extremum();
-    cout << "max=" << (int)max << ", ";
-    cout << "min=" << (int)min << endl;
-}
-
-// 印出直方圖
 void imgraw::pri_htg(string title=""){
     // 取得數據統計
     this->histogram();
     // 壓縮數據
-    size_t epart=32; // 壓縮幾等分(上下)
-    double piece=one_level/epart; // 一等份範圍(左右)
+    size_t epart=32; // 壓縮幾等分(高)
+    double piece=one_level/epart; // 一等份
     size_t htg_comp[epart]{};
     for (unsigned j = 0; j < epart; ++j){
         for(unsigned i = 0; i < piece; ++i){
