@@ -1,8 +1,8 @@
 /**********************************************************
-Name : OpenRaw 2.8.0
+Name : OpenRaw 2.8.1
 Date : 2016/08/04
 By   : CharlotteHonG
-Final: 2017/03/05
+Final: 2017/05/21
 **********************************************************/
 #ifndef OPEN_RAW_HPP
 #define OPEN_RAW_HPP
