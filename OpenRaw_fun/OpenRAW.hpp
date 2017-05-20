@@ -108,6 +108,26 @@ public:
     ImrSize masksize;
 };
 /*
+     ######                                       ######
+     ##   ##                                      ##   ##
+     ##   ##   ######   #####    #####            ##   ##   ######  ##   ##
+     ######   ##   ##  ##       ##   ##           ######   ##   ##  ## # ##
+     ##   ##  ##   ##   ####    #######           ## ##    ##   ##  ## # ##
+     ##   ##  ##  ###      ##   ##                ##  ##   ##  ###  ## # ##
+     ######    ### ##  #####     #####   #######  ##   ##   ### ##   ## ##
+
+*/
+class Base_Raw{
+public:
+    Base_Raw(ImrSize size);
+    virtual ~Base_Raw() = 0;
+protected:
+    size_t width;
+    size_t high;
+    vector<imch> img_data;
+};
+Base_Raw::~Base_Raw() = default;
+/*
        ##
 
      ####     ### ##    ######  ## ###    ######  ##   ##
@@ -117,9 +137,10 @@ public:
      ######   ##   ##       ##  ##        ### ##   ## ##
                         #####
 */
-class imgraw {
+class imgraw: public Base_Raw {
 public: // 建構子
     imgraw(ImrSize size);
+    ~imgraw() = default;
 public: // imgraw
     void read(string filename);
     void write(string filename);
@@ -148,10 +169,9 @@ public: // 重載運算子
     imgraw & operator+=(int const& rhs);
     imgraw & operator-=(int const& rhs);
 private: // 必要成員(建構)
-    size_t width;
-    size_t high;
-    vector<imch> img_data;
-    // ifstream::pos_type filesize;
+    // size_t width;
+    // size_t high;
+    // vector<imch> img_data;
     ImrSize masksize;
 private: // 成員(函式)
     string filename;

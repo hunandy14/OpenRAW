@@ -34,10 +34,17 @@ ImrMask::ImrMask(initializer_list<int> mask): mask(mask){
     size_t len=sqrt(mask.size());
     masksize=ImrSize(len, len);
 }
+// Base_Raw 建構子
+Base_Raw::Base_Raw(ImrSize size): 
+    width(size.width), high(size.high), 
+    img_data(size.width*size.high)
+{
+
+}
 // imgraw建構子
 imgraw::imgraw(ImrSize size): 
-    width(size.width), high(size.high), 
-    img_data(size.width*size.high), masksize(ImrSize(3, 3))
+    Base_Raw(size),
+    masksize(ImrSize(3, 3))
 {
 
 }
