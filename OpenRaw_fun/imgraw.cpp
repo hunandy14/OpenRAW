@@ -1,5 +1,5 @@
-/**********************************************************
-Name : Imgraw ¹ê§@
+ï»¿/**********************************************************
+Name : Imgraw å¯¦ä½œ
 Date : 2016/10/03
 By   : CharlotteHonG
 Final: 2016/10/13
@@ -16,13 +16,13 @@ namespace imr{
      ######   ##   ##       ##  ##        ### ##   ## ##
                         #####
 */
-// ¶×¤JÀÉ®×
+// åŒ¯å…¥æª”æ¡ˆ
 void Imgraw::read(string filename) {
     this->filename = filename;
-    // ¤G¶i¦ì¼Ò¦¡¶}ÀÉ´ú¸Õ
+    // äºŒé€²ä½æ¨¡å¼é–‹æª”æ¸¬è©¦
     fstream img;
     img.open(filename, ios::in | ios::binary);
-    // ¦pªG¶}±ÒÀÉ®×¥¢±Ñ¡Afp¬°0¡F¦¨¥\¡Afp¬°«D0
+    // å¦‚æœé–‹å•Ÿæª”æ¡ˆå¤±æ•—ï¼Œfpç‚º0ï¼›æˆåŠŸï¼Œfpç‚ºé0
     if(!img) {
         img.close();
         cout << "No file." << endl;
@@ -31,26 +31,26 @@ void Imgraw::read(string filename) {
     else {
         // cout << "File ok." << endl;
     } img.close();
-    // ¤G¶i¦ì¼Ò¦¡ÅªÀÉ
-    // ¨ú±oÁ`ªø
+    // äºŒé€²ä½æ¨¡å¼è®€æª”
+    // å–å¾—ç¸½é•·
     img.open(this->filename, ios::in | ios::binary);
     img.seekg(0, ios::end);
     auto filesize = img.tellg();
     img.seekg(0, ios::beg);
-    // Åª¨ú­È
+    // è®€å–å€¼
     this->img_data.vector::resize(filesize);
     img.read((char*)&this->img_data[0], filesize);
     img.close();
 }
-// ±N°O¾ĞÅé¸ê®Æ¶×¥X
+// å°‡è¨˜æ†¶é«”è³‡æ–™åŒ¯å‡º
 void Imgraw::write(string filename) {
-    // ¶i¦ì¼Ò¦¡¼gÀÉ
+    // é€²ä½æ¨¡å¼å¯«æª”
     fstream img_file;
     img_file.open(filename, ios::out | ios::binary);
     img_file.write((char*)&img_data[0], this->img_data.size());
     img_file.close();
 }
-// ¤G­È¤Æ(¬É½u, ¶ñ¦â¼Æ­È, ­I´º¼Æ­È)
+// äºŒå€¼åŒ–(ç•Œç·š, å¡«è‰²æ•¸å€¼, èƒŒæ™¯æ•¸å€¼)
 void Imgraw::binarizae(imch value=128,
         imch high=255, imch low=0)
 {
@@ -58,18 +58,18 @@ void Imgraw::binarizae(imch value=128,
     for (unsigned i = 0; i < len; ++i)
         (*this)[i] = (*this)[i]>value? high: low;
 }
-// ¤@¦¸§ó§ï©Ò¦³¹³¯À(§ó§ïªº¼Æ­È)
+// ä¸€æ¬¡æ›´æ”¹æ‰€æœ‰åƒç´ (æ›´æ”¹çš„æ•¸å€¼)
 void Imgraw::value(imch value){
     for(auto&& i : this->img_data)
         i = value;
 }
-// ¹Ï¤ù¤j¤p¬O§_¬Û¦P
+// åœ–ç‰‡å¤§å°æ˜¯å¦ç›¸åŒ
 bool Imgraw::check_size(Imgraw const& rhs){
     if(this->width==rhs.width and this->high==rhs.high) {
         return 1;
     } return 0;
 }
-// ÀH¾÷¦^¶Ç¤@­ÓÂI
+// éš¨æ©Ÿå›å‚³ä¸€å€‹é»
 imch & Imgraw::random(){
     return const_cast<imch&>(static_cast<const Imgraw&>(*this).random());
 }
@@ -78,7 +78,7 @@ const imch & Imgraw::random() const{
     size_t idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
     return (*this)[idx];
 }
-// °Ï¶ô¥´¦L
+// å€å¡Šæ‰“å°
 void Imgraw::pri_blk(string name, ImrCoor pos, ImrSize masksize){
     cout << name << endl;
     for(unsigned j = pos.y; j < pos.y+masksize.high; ++j){
