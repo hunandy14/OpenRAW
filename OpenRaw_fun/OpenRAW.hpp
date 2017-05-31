@@ -133,6 +133,7 @@ public: // 重載運算子
     const imch& at2d(size_t y, size_t x) const;
 public:
     void resize(ImrSize size);
+    virtual void info(string name);
 protected:
     size_t width;
     size_t high;
@@ -155,7 +156,6 @@ public: // 建構子
 public: // Imgraw
     void read(string filename);
     void write(string filename);
-    void info(string name);
     void binarizae(imch value, imch high, imch low);
     void value(imch value);
     bool check_size(Imgraw const& rhs);
