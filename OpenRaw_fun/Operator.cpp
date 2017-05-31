@@ -16,11 +16,17 @@ namespace imr{
      ######   ##   ##  ##        #####   ######   ######    #####
 
 */
+inline
 bool operator==(const ImrSize& lhs, const ImrSize& rhs){
     return (lhs.width==rhs.width and lhs.high==rhs.high);
 }
+inline
 bool operator!=(const ImrSize& lhs, const ImrSize& rhs){
     return !(lhs==rhs);
+}
+inline
+ImrSize::operator const size_t() const{
+  return high*width;
 }
 /*
      ######                       ####
@@ -32,27 +38,33 @@ bool operator!=(const ImrSize& lhs, const ImrSize& rhs){
      ######   ##   ##  ##         ####    #####    #####   ##
 
 */
+inline
 ImrCoor const operator+(ImrCoor const &lhs, ImrCoor const &rhs){
     return ImrCoor(lhs) += rhs;
 }
+inline
 ImrCoor const operator-(ImrCoor const &lhs, ImrCoor const &rhs){
     return ImrCoor(lhs) -= rhs;
 }
+inline
 ImrCoor & ImrCoor::operator+=(const ImrCoor &rhs){
     this->y += rhs.y;
     this->x += rhs.x;
     return *this;
 }
+inline
 ImrCoor & ImrCoor::operator-=(const ImrCoor &rhs){
     this->y -= rhs.y;
     this->x -= rhs.x;
     return *this;
 }
+inline
 ImrCoor & ImrCoor::operator+=(const int & val){
     this->y += val;
     this->x += val;
     return *this;
 }
+inline
 ImrCoor & ImrCoor::operator-=(const int & val){
     this->y -= val;
     this->x -= val;
@@ -69,16 +81,20 @@ ImrCoor & ImrCoor::operator-=(const int & val){
 
 */
 // 重載下標符號
+inline
 int & ImrMask::operator[](const size_t idx){
     return const_cast<int&>(static_cast<const ImrMask&>(*this)[idx]);
 }
+inline
 const int & ImrMask::operator[](const size_t idx) const{
     return this->mask[idx];
 }
 // 重載加減符號
+inline
 ImrMask const operator+(ImrMask const &lhs, ImrMask const &rhs){
     return ImrMask(lhs) += rhs;
 }
+inline
 ImrMask const operator-(ImrMask const &lhs, ImrMask const &rhs){
     return ImrMask(lhs) -= rhs;
 }
@@ -120,6 +136,47 @@ ImrMask & ImrMask::operator-=(const int & rhs){
     return (*this);
 }
 /*
+   ######                              ######
+   ##   ##                             ##   ##
+   ##   ##   ######   #####    #####   ##   ##   ######  ##   ##
+   ######   ##   ##  ##       ##   ##  ######   ##   ##  ## # ##
+   ##   ##  ##   ##   ####    #######  ## ##    ##   ##  ## # ##
+   ##   ##  ##  ###      ##   ##       ##  ##   ##  ###  ## # ##
+   ######    ### ##  #####     #####   ##   ##   ### ##   ## ##
+
+*/
+// 重載下標符號
+inline
+imch& BaseRaw::operator[](const size_t idx){
+    return const_cast<imch&>(static_cast<const BaseRaw&>(*this)[idx]);
+}
+inline
+const imch& BaseRaw::operator[](const size_t idx) const{
+    return this->img_data[idx];
+}
+// 重載加減符號
+BaseRaw& BaseRaw::operator+=(int const& rhs){
+    for(unsigned i = 0; i < this->img_data.size(); ++i) {
+        this->img_data[i] += static_cast<imch>(rhs);
+    }return (*this);
+}
+BaseRaw& BaseRaw::operator-=(int const& rhs){
+    for(unsigned i = 0; i < this->img_data.size(); ++i) {
+        this->img_data[i] -= static_cast<imch>(rhs);
+    }return (*this);
+}
+// 以二維方式讀取或寫入
+inline
+imch& BaseRaw::at2d(size_t y, size_t x){
+    return const_cast<imch&>(
+        static_cast<const BaseRaw&>(*this).at2d(y, x));
+}
+inline
+const imch& BaseRaw::at2d(size_t y, size_t x) const{
+    size_t pos = (y*this->width)+x;
+    return this->img_data.at(pos);
+}
+/*
        ##
 
      ####     ### ##    ######  ## ###    ######  ##   ##
@@ -129,22 +186,5 @@ ImrMask & ImrMask::operator-=(const int & rhs){
      ######   ##   ##       ##  ##        ### ##   ## ##
                         #####
 */
-// 重載下標符號
-imch& imgraw::operator[](const size_t idx){
-    return const_cast<imch&>(static_cast<const imgraw&>(*this)[idx]);
-}
-const imch& imgraw::operator[](const size_t idx) const{
-    return this->img_data[idx];
-}
-// 重載加減符號
-imgraw & imgraw::operator+=(int const& rhs){
-    for(unsigned i = 0; i < this->img_data.size(); ++i) {
-        this->img_data[i] += static_cast<imch>(rhs);
-    }return (*this);
-}
-imgraw & imgraw::operator-=(int const& rhs){
-    for(unsigned i = 0; i < this->img_data.size(); ++i) {
-        this->img_data[i] -= static_cast<imch>(rhs);
-    }return (*this);
-}
+
 } //imr

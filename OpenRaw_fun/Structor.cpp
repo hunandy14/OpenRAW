@@ -2,7 +2,7 @@
 Name : 建構子
 Date : 2016/10/03
 By   : CharlotteHonG
-Final: 2016/10/13
+Final: 2017/05/21
 **********************************************************/
 #include "OpenRAW.hpp"
 namespace imr{
@@ -34,16 +34,9 @@ ImrMask::ImrMask(initializer_list<int> mask): mask(mask){
     size_t len=sqrt(mask.size());
     masksize=ImrSize(len, len);
 }
-// Base_Raw 建構子
-Base_Raw::Base_Raw(ImrSize size): 
-    width(size.width), high(size.high), 
-    img_data(size.width*size.high)
-{
-
-}
-// imgraw建構子
-imgraw::imgraw(ImrSize size): 
-    Base_Raw(size),
+// Imgraw建構子
+Imgraw::Imgraw(ImrSize size): 
+    BaseRaw(size),
     masksize(ImrSize(3, 3))
 {
 

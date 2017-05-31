@@ -21,7 +21,7 @@ int main(int argc, char const *argv[]) {
     // 初始化亂數種子
     srand((unsigned)time(NULL)); rand();
     // 創建畫布
-    imgraw img(ImrSize(Pic_y, Pic_x));
+    Imgraw img(ImrSize(Pic_y, Pic_x));
     // 讀取檔案
     img.read(Pic_name_in);
     //---------------------------------------------------------

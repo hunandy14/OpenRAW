@@ -30,11 +30,12 @@ Final: 2017/02/14
 #include "OpenRAW_fun\ImrCoor.cpp"
 
 //=========================================================
-//------------------------imgraw---------------------------
+//------------------------Imgraw---------------------------
 //=========================================================
-#include "OpenRAW_fun\imgraw.cpp"
-#include "OpenRAW_fun\imgraw_histogram.cpp"
-#include "OpenRAW_fun\imgraw_Mask.cpp"
+#include "OpenRAW_fun\BaseRaw.cpp"
+#include "OpenRAW_fun\Imgraw.cpp"
+#include "OpenRAW_fun\Imgraw_histogram.cpp"
+#include "OpenRAW_fun\Imgraw_Mask.cpp"
 
 //=========================================================
 //------------------------Operator-------------------------

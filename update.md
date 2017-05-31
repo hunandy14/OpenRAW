@@ -1,133 +1,140 @@
-updata
+﻿updata
 ===
 
-## 2.8.0 ������i����
-1. []�s�W�m�ߥμҲաA�i��HImrMask����Ƶ��c[^�Y�ɤ��X]
-2. []�ϥ��~�ӡA�g�Ӧh��at2d()�ӥB��Ƶ��c���@��
-3. []htg�i��ܴX����
-4. []�϶��ƻs�[�J���ʨ禡
-5. []RGBŪ��(�έӷs���O�~��)
-6. [v]��� filesize ����
-7. [v]��� imgraw �� op+()
-8. [v]*mask��^int]�קﳡ���g�k
+
+
+## 2.8.0 版本改進項目
+1. []新增練習用模組，可能以ImrMask當資料結構[^即時反饋]
+2. []使用繼承，寫太多次at2d()而且資料結構都一樣
+3. []htg可選擇幾等分
+4. []區塊複製加入移動函式
+5. []RGB讀取(用個新類別繼承)
+6. [v]放棄 filesize 成員
+7. [v]放棄 imgraw 的 op+()
+8. [v]*mask改回int]修改部分寫法
+
+
+1. []使用繼承抽出 imgraw 與 mask 相同
+2. [v]改為大寫 Imgraw
+3. [v]size 加入轉型為 int 轉出 
 
 ---
 
-## 2.7.0 ������i����
-1. [v]�󧹾㪺 �����p�e http://goo.gl/iiATVh
-2. []�s�W�m�ߥμҲաA�i��HImrMask����Ƶ��c[^�Y�ɤ��X]
-3. [v]*mask��^int(�i��s�b-���B�n)
-4. []�ϥ��~�ӡA�g�Ӧh��at2d()�ӥB��Ƶ��c���@��
-5. []htg�i��ܴX����
-6. [v]htg�[�L����
-7. [v]�u�� setMasksize (���w�w�]��3x3�ѰO��]���|�X��)
-8. [v]�s�Wpri_blk()
-9. [v]�u�� ImrCoor oper+- �B��į�
-9. [v]�s�W ImrCoor oper+-= �B��
-10. [v]�N__n�ץ���idx
-11. [v]imrmask at2d��const�禡��X
-12. [v]�u�ƨ�����(�O�d�¦����ƧǪk)
-13. [v]�þ�ؤl�q�غc�l���X(�_�h�|�I�s�h��)
-14. [v]�u�ƭ���ImrMask�B��l
+## 2.7.0 版本改進項目
+1. [v]更完整的 重載計畫 http://goo.gl/iiATVh
+2. []新增練習用模組，可能以ImrMask當資料結構[^即時反饋]
+3. [v]*mask改回int(可能存在-的遮罩)
+4. []使用繼承，寫太多次at2d()而且資料結構都一樣
+5. []htg可選擇幾等分
+6. [v]htg加印極值
+7. [v]優化 setMasksize (給定預設值3x3忘記改也不會出事)
+8. [v]新增pri_blk()
+9. [v]優化 ImrCoor oper+- 運算效能
+9. [v]新增 ImrCoor oper+-= 運算
+10. [v]將__n修正為idx
+11. [v]imrmask at2d的const函式整合
+12. [v]優化取中值(保留舊有的排序法)
+13. [v]亂樹種子從建構子移出(否則會呼叫多次)
+14. [v]優化重載ImrMask運算子
 
 ---
 
-## 2.6.0 ������i����
-1. []�󧹾㪺 �����p�e http://goo.gl/iiATVh
-2. []�s�W�m�ߥμҲաA�i��HImrMask����Ƶ��c[^�Y�ɤ��X]
-3. []mask��^int(�i��s�b-���B�n)
-4. [v]���]�e���j�p�S�����]vector�j�p
-5. []�ϥ��~�ӡA�g�Ӧh��at2d()�ӥB��Ƶ��c���@��
-6. [v]�[�J�H�����üƪ��禡
-7. [x]Imrmask�D��Ƶ��c�ק令\* �קK���O�ɶ�
-8. [v]resize_canvas(imint filesize) �O�_�n�[�J
-9. [v]maskinfo(string name) �[�Jneme�ޤJ
-10. [v]�R���������ƥN�X
-11. [v]����imint���A�N��
-12. [v]�s�W������
-13. [v]�u��const�禡�����g2��
-14. [v]�[�J�H�����üƪ��禡��const�禡
-15. [v]at2d() const�禡��X
-16. [v]binarizae() �u�Ʀ����
-17. [v]maskVal() const�禡��X
+## 2.6.0 版本改進項目
+1. []更完整的 重載計畫 http://goo.gl/iiATVh
+2. []新增練習用模組，可能以ImrMask當資料結構[^即時反饋]
+3. []mask改回int(可能存在-的遮罩)
+4. [v]重設畫布大小沒有重設vector大小
+5. []使用繼承，寫太多次at2d()而且資料結構都一樣
+6. [v]加入隨機取亂數的函式
+7. [x]Imrmask主資料結構修改成\* 避免浪費時間
+8. [v]resize_canvas(imint filesize) 是否要加入
+9. [v]maskinfo(string name) 加入neme引入
+10. [v]刪除部分重複代碼
+11. [v]取消imint型態代換
+12. [v]新增取中值
+13. [v]優化const函式必須寫2次
+14. [v]加入隨機取亂數的函式的const函式
+15. [v]at2d() const函式整合
+16. [v]binarizae() 優化成單行
+17. [v]maskVal() const函式整合
 
-[^�Y�ɤ��X]:ImrMask �i�H�s�W�@���H���ƩάO�۩w�q�ƨ�Ӥ�k
-	��K���պt��k���ɭԥΡA��o�Y�ɤ��X
-	�o�ӵ��c�ݭn�����ƩεL���r���A�Ҽ{����өάO�˪O
-
----
-
-## 2.5.2 ���ݧ�i����
-1. []�󧹾㪺 �����p�e http://goo.gl/iiATVh
-2. [x]Imrmask info �ϥηs��for
-3. []�s�W�m�ߥμҲաA�i��HImrMask����Ƶ��c[^�Y�ɤ��X]
-4. []mask��^int(�i��s�b-���B�n)
-5. [v]�������Ȫ��禡�����D���ӬOdouble
-6. [v]����Y�ɲ��J��Ƨ���
-7. [v]imrCoor�w�]�غc�l (��������X���D�n�]�w�]��)
-8. [v]����ɮשR�W�Ŷ����D
-9. []���]�e���j�p�S�����]vector�j�p
-10. []�ϥ��~�ӡA�g�Ӧh��at2d()�ӥB��Ƶ��c���@��
-11. [v]���c���� htg_data �j�p���~���ӬO 256
-12. []�[�J�H�����üƪ��禡
-13. []Imrmask�D��Ƶ��c�ק令\* �קK���O�ɶ�
-14. []resize_canvas(imint filesize) �O�_�n�[�J
-15. [v]���ɦW�W�[.hpp
-16. [v]�אּ��ȫغc
-
-[^�Y�ɤ��X]:ImrMask �i�H�s�W�@���H���ƩάO�۩w�q�ƨ�Ӥ�k
-	��K���պt��k���ɭԥΡA��o�Y�ɤ��X
-	�o�ӵ��c�ݭn�����ƩεL���r���A�Ҽ{����өάO�˪O
+[^即時反饋]:ImrMask 可以新增一組隨機數或是自定義數兩個方法
+	方便測試演算法的時候用，獲得即時反饋
+	這個結構需要支持整數或無號字元，考慮分兩個或是樣板
 
 ---
 
-## 2.4 ���ݧ�i����
-1. [v]�ƪ��A�{�����Ӧh�F�������}
-2. [v]main����F �u�Ƥ@�U
-3. [x]�ɨ���L�B��l�A�p=
-4. [x]�v���إ߮ɡA�i�H�إ߹w�]����
-5. [v]3�M4�אּ�@�� value() �����ק�������ƭ�
-6. [r]�󧹾㪺 �����p�e http://goo.gl/iiATVh
-7. [v]�G�Ȥ�
-8. [v]imrmask���[��B��l
-9. [v]info() �L�X���e
-10. [v]imrmask info() �L�X�B�n�ƭ�
-11. [v]imrmask��������
-12. [x]maskval �W�[�@��Ū���覡
-13. [v]Imrmask �W�[�غc�l(�w�]�Ҧ��ƭ�)
-14. [v]Imrmask �����غc�l���w�]��
+## 2.5.2 版待改進項目
+1. []更完整的 重載計畫 http://goo.gl/iiATVh
+2. [x]Imrmask info 使用新版for
+3. []新增練習用模組，可能以ImrMask當資料結構[^即時反饋]
+4. []mask改回int(可能存在-的遮罩)
+5. [v]取平均值的函式有問題應該是double
+6. [v]把標頭檔移入資料夾內
+7. [v]imrCoor預設建構子 (重載那邊出問題要設預設值)
+8. [v]拆分檔案命名空間問題
+9. []重設畫布大小沒有重設vector大小
+10. []使用繼承，寫太多次at2d()而且資料結構都一樣
+11. [v]結構內的 htg_data 大小錯誤應該是 256
+12. []加入隨機取亂數的函式
+13. []Imrmask主資料結構修改成\* 避免浪費時間
+14. []resize_canvas(imint filesize) 是否要加入
+15. [v]副檔名增加.hpp
+16. [v]改為初值建構
+
+[^即時反饋]:ImrMask 可以新增一組隨機數或是自定義數兩個方法
+	方便測試演算法的時候用，獲得即時反饋
+	這個結構需要支持整數或無號字元，考慮分兩個或是樣板
+
+---
+
+## 2.4 版待改進項目
+1. [v]排版，程式瑪太多了必須切開
+2. [v]main太醜了 優化一下
+3. [x]補足其他運算子，如=
+4. [x]影像建立時，可以建立預設像素
+5. [v]3和4改為一個 value() 直接修改全部的數值
+6. [r]更完整的 重載計畫 http://goo.gl/iiATVh
+7. [v]二值化
+8. [v]imrmask的加減運算子
+9. [v]info() 印出長寬
+10. [v]imrmask info() 印出遮罩數值
+11. [v]imrmask的平均值
+12. [x]maskval 增加一維讀取方式
+13. [v]Imrmask 增加建構子(預設所有數值)
+14. [v]Imrmask 取消建構子的預設值
 15. [v]ImrCoor info()
 16. [v]ImrSize info()
 
-**����**
+**完成**
 
 
 ---
 
-## 2.3 ���ݧ�i����
-1. maskVal()�אּcall by reference
-2. �s�W�����B��l[+, -, *, /]�A�i�H�Ϲ�ϤιϹ�ƭ�
-3. ��i�쥻�^�ǰѦҪ��A�h�s�W�@�Ӧ^�ǰѦұ`��
+## 2.3 版待改進項目
+1. maskVal()改為call by reference
+2. 新增重載運算子[+, -, *, /]，可以圖對圖及圖對數值
+3. 改進原本回傳參考的，多新增一個回傳參考常數
 
-**����**
+**完成**
 > 1,2,3
 
 ---
-# �ݧ�i����
-## 2.2 ���ݧ�i����
-1. X,Y�ܼ����Өϥ� unsigned
-2. �s�W���o�B�n�禡
-3. ImrSize�n�令unsigned
-4. unsigned int �令 size_type
-4. �Ҽ{����Ϸs�W����(�b�ϧγ̥k��)
-5. �Ҽ{�s�WXY�y�Ъ����O
-6. �Ҽ{�B�n�O�_�����N�ܼƦs�J���O��
-7. �s�Wat2d()�H�ѦҤ覡�ק�
+# 待改進項目
+## 2.2 版待改進項目
+1. X,Y變數應該使用 unsigned
+2. 新增取得遮罩函式
+3. ImrSize要改成unsigned
+4. unsigned int 改成 size_type
+4. 考慮直方圖新增極值(在圖形最右方)
+5. 考慮新增XY座標的類別
+6. 考慮遮罩是否直接將變數存入類別內
+7. 新增at2d()以參考方式修改
 
-**����**
+**完成**
 > 1,2,3,4,5,7
 
-��6�I�A�ˤF�@�ӷs���O����Ƶ��c�A�٦��ƧǤ�k
+第6點，弄了一個新類別當資料結構，還有排序方法
 
 ---
 

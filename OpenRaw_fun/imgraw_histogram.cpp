@@ -16,7 +16,7 @@ namespace imr {
     #    # #  ####    #    ####   ####  #    # #    # #    #
 */
 // 眔计沮伐
-void imgraw::extremum(){
+void Imgraw::extremum(){
     imch temp;
     this->min=255;
     this->max=0;
@@ -32,7 +32,7 @@ void imgraw::extremum(){
     }
 }
 // 眔计沮参璸(计0~255Τ碭)
-void imgraw::histogram(){
+void Imgraw::histogram(){
     // 耴箂
     for(auto&& i : this->htg_data)
         i=0;
@@ -44,7 +44,7 @@ void imgraw::histogram(){
     }
 }
 // よ瓜
-void imgraw::pri_htg(string title=""){
+void Imgraw::pri_htg(string title=""){
     // 眔计沮参璸
     this->histogram();
     // 溃罽计沮

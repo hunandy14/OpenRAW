@@ -18,17 +18,17 @@ namespace imr {
 
 */
 // 取得遮罩值 (原點，遮罩座標，位移)
-imch& imgraw::maskVal(ImrCoor ori, ImrCoor mas,
+imch& Imgraw::maskVal(ImrCoor ori, ImrCoor mas,
         ImrCoor shi=ImrCoor(-1,-1))
 {
     // 回傳正確位置的數值
     return const_cast<imch&>(
-        static_cast<const imgraw&>
+        static_cast<const Imgraw&>
         (*this).maskVal(ori, mas, shi)
     );
     // return this->at2d((pos.y), (pos.x));
 }
-const imch& imgraw::maskVal(ImrCoor ori, ImrCoor mas,
+const imch& Imgraw::maskVal(ImrCoor ori, ImrCoor mas,
         ImrCoor shi=ImrCoor(-1,-1)) const
 {
     // 取得對應位置
@@ -50,11 +50,11 @@ const imch& imgraw::maskVal(ImrCoor ori, ImrCoor mas,
     return this->at2d((pos.y), (pos.x));
 }
 // 設定遮罩
-void imgraw::setMaskSize(ImrSize masksize){
+void Imgraw::setMaskSize(ImrSize masksize){
     this->masksize = masksize;
 }
 // 取得遮罩，回傳一維陣列(原點位置，位移維度)
-const ImrMask imgraw::getMask(ImrCoor ori,
+const ImrMask Imgraw::getMask(ImrCoor ori,
         ImrCoor shi = ImrCoor(-1,-1))
 {
     // 創建臨時遮罩

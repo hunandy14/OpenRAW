@@ -1,5 +1,5 @@
 /**********************************************************
-Name : imgraw 實作
+Name : Imgraw 實作
 Date : 2016/10/03
 By   : CharlotteHonG
 Final: 2016/10/13
@@ -17,7 +17,7 @@ namespace imr{
                         #####
 */
 // 匯入檔案
-void imgraw::read(string filename) {
+void Imgraw::read(string filename) {
     this->filename = filename;
     // 二進位模式開檔測試
     fstream img;
@@ -43,41 +43,15 @@ void imgraw::read(string filename) {
     img.close();
 }
 // 將記憶體資料匯出
-void imgraw::write(string filename) {
+void Imgraw::write(string filename) {
     // 進位模式寫檔
     fstream img_file;
     img_file.open(filename, ios::out | ios::binary);
     img_file.write((char*)&img_data[0], this->img_data.size());
     img_file.close();
 }
-// 以二維方式讀取或寫入(檢查邊界)
-imch& imgraw::at2d(size_t y, size_t x){
-    return const_cast<imch&>(
-        static_cast<const imgraw&>(*this).at2d(y, x));
-}
-const imch& imgraw::at2d(size_t y, size_t x) const{
-    size_t pos = (y*this->width)+x;
-    return this->img_data.at(pos);
-}
-// 調整畫布大小
-void imgraw::resize_canvas(size_t size) {
-    this->width = 0;
-    this->high = 0;
-    this->img_data.vector::resize(size);
-}
-void imgraw::resize_canvas(ImrSize size) {
-    size_t y=size.high, x=size.width;
-    this->width = x;
-    this->high = y;
-    this->img_data.vector::resize(x*y);
-}
-// 印出畫布大小
-void imgraw::info(string name=""){
-    cout << "[" << name << "]畫布大小(寬x長) = ";
-    cout << this->width << " x " << this->high << endl;
-}
 // 二值化(界線, 填色數值, 背景數值)
-void imgraw::binarizae(imch value=128,
+void Imgraw::binarizae(imch value=128,
         imch high=255, imch low=0)
 {
     size_t len = this->width * this->high;
@@ -85,27 +59,27 @@ void imgraw::binarizae(imch value=128,
         (*this)[i] = (*this)[i]>value? high: low;
 }
 // 一次更改所有像素(更改的數值)
-void imgraw::value(imch value){
+void Imgraw::value(imch value){
     for(auto&& i : this->img_data)
         i = value;
 }
 // 圖片大小是否相同
-bool imgraw::check_size(imgraw const& rhs){
+bool Imgraw::check_size(Imgraw const& rhs){
     if(this->width==rhs.width and this->high==rhs.high) {
         return 1;
     } return 0;
 }
 // 隨機回傳一個點
-imch & imgraw::random(){
-    return const_cast<imch&>(static_cast<const imgraw&>(*this).random());
+imch & Imgraw::random(){
+    return const_cast<imch&>(static_cast<const Imgraw&>(*this).random());
 }
-const imch & imgraw::random() const{
+const imch & Imgraw::random() const{
     int up=this->img_data.size(), low=0;
     size_t idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
     return (*this)[idx];
 }
 // 區塊打印
-void imgraw::pri_blk(string name, ImrCoor pos, ImrSize masksize){
+void Imgraw::pri_blk(string name, ImrCoor pos, ImrSize masksize){
     cout << name << endl;
     for(unsigned j = pos.y; j < pos.y+masksize.high; ++j){
         for(unsigned i = pos.x; i < pos.x+masksize.width; ++i) {

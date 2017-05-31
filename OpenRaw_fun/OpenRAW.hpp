@@ -1,5 +1,5 @@
 /**********************************************************
-Name : OpenRaw 2.8.1
+Name : OpenRaw 3.0.0
 Date : 2016/08/04
 By   : CharlotteHonG
 Final: 2017/05/21
@@ -39,6 +39,7 @@ public:
     ImrSize(size_t y, size_t x);
     friend bool operator==(const ImrSize& lhs, const ImrSize& rhs);
     friend bool operator!=(const ImrSize& lhs, const ImrSize& rhs);
+    operator const size_t() const;
     void info();
 public:
     size_t high;
@@ -117,16 +118,26 @@ public:
      ######    ### ##  #####     #####   #######  ##   ##   ### ##   ## ##
 
 */
-class Base_Raw{
+class BaseRaw{
+protected:
+    BaseRaw(ImrSize size): 
+    width(size.width), high(size.high), 
+    img_data(size.width*size.high){}
+    virtual ~BaseRaw() = default;
+public: // 重載運算子
+    imch & operator[](const size_t idx);
+    const imch & operator[](const size_t idx) const;
+    BaseRaw& operator+=(int const& rhs);
+    BaseRaw& operator-=(int const& rhs);
+    imch& at2d(size_t y, size_t x);
+    const imch& at2d(size_t y, size_t x) const;
 public:
-    Base_Raw(ImrSize size);
-    virtual ~Base_Raw() = 0;
+    void resize(ImrSize size);
 protected:
     size_t width;
     size_t high;
     vector<imch> img_data;
 };
-Base_Raw::~Base_Raw() = default;
 /*
        ##
 
@@ -137,21 +148,17 @@ Base_Raw::~Base_Raw() = default;
      ######   ##   ##       ##  ##        ### ##   ## ##
                         #####
 */
-class imgraw: public Base_Raw {
+class Imgraw: public BaseRaw {
 public: // 建構子
-    imgraw(ImrSize size);
-    ~imgraw() = default;
-public: // imgraw
+    Imgraw(ImrSize size);
+    ~Imgraw() = default;
+public: // Imgraw
     void read(string filename);
     void write(string filename);
-    imch & at2d(size_t y, size_t x);
-    const imch & at2d(size_t y, size_t x) const;
-    void resize_canvas(size_t size);
-    void resize_canvas(ImrSize size);
     void info(string name);
     void binarizae(imch value, imch high, imch low);
     void value(imch value);
-    bool check_size(imgraw const& rhs);
+    bool check_size(Imgraw const& rhs);
     imch & random();
     const imch & random() const;
     void pri_blk(string name, ImrCoor pos, ImrSize masksize);
@@ -163,15 +170,7 @@ public: // Mask
 public: // histogram
     void pri_htg(string title);
     void pri_htg2(string title);
-public: // 重載運算子
-    imch & operator[](const size_t idx);
-    const imch & operator[](const size_t idx) const;
-    imgraw & operator+=(int const& rhs);
-    imgraw & operator-=(int const& rhs);
 private: // 必要成員(建構)
-    // size_t width;
-    // size_t high;
-    // vector<imch> img_data;
     ImrSize masksize;
 private: // 成員(函式)
     string filename;
@@ -180,9 +179,7 @@ private: // 成員(函式)
     void extremum();
     void histogram();
 };
-} //imgraw
-
-
+} //Imgraw
 
 
 #endif

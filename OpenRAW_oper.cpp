@@ -19,7 +19,7 @@ using namespace imr;
 
 int main(int argc, char const *argv[]) {
     // 創建畫布
-    imgraw img(ImrSize(Pic_y, Pic_x));
+    Imgraw img(ImrSize(Pic_y, Pic_x));
     // 讀取檔案
     img.read(Pic_name_in);
     // ImrCoor 加減運算
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
     p+=1; p.info();
     p-=1; p.info();
     cout << endl;
-    // imgraw 整理數值加減
+    // Imgraw 整理數值加減
     img.pri_blk("img", ImrCoor(0, 0), ImrSize(4, 4));
     img+=1;
     img.pri_blk("img", ImrCoor(0, 0), ImrSize(4, 4));
@@ -41,6 +41,8 @@ int main(int argc, char const *argv[]) {
     ImrSize b(4, 4);
     if(a==b)
         cout << "a euq b" << endl;
+
+    cout << "a=" << a << endl;
 
 
     // 輸出檔案
