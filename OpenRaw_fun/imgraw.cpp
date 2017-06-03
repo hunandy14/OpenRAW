@@ -63,21 +63,6 @@ void Imgraw::value(imch value){
     for(auto&& i : this->img_data)
         i = value;
 }
-// 圖片大小是否相同
-bool Imgraw::check_size(Imgraw const& rhs){
-    if(this->width==rhs.width and this->high==rhs.high) {
-        return 1;
-    } return 0;
-}
-// 隨機回傳一個點
-imch & Imgraw::random(){
-    return const_cast<imch&>(static_cast<const Imgraw&>(*this).random());
-}
-const imch & Imgraw::random() const{
-    int up=this->img_data.size(), low=0;
-    size_t idx = ((rand() / (RAND_MAX+1.0)) * (up - low) + low);
-    return (*this)[idx];
-}
 // 區塊打印
 void Imgraw::pri_blk(string name, ImrCoor pos, ImrSize masksize){
     cout << name << endl;

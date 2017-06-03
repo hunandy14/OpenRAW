@@ -133,6 +133,9 @@ public: // 重載運算子
     const imch& at2d(size_t y, size_t x) const;
 public:
     void resize(ImrSize size);
+    bool check_size(BaseRaw const& rhs);
+    imch & random();
+    const imch & random() const;
     virtual void info(string name);
 protected:
     size_t width;
@@ -158,9 +161,6 @@ public: // Imgraw
     void write(string filename);
     void binarizae(imch value, imch high, imch low);
     void value(imch value);
-    bool check_size(Imgraw const& rhs);
-    imch & random();
-    const imch & random() const;
     void pri_blk(string name, ImrCoor pos, ImrSize masksize);
 public: // Mask
     void setMaskSize(ImrSize masksize);
