@@ -8,7 +8,6 @@ Final: 2017/05/21
 
 namespace imr{
 // 調整畫布大小
-inline
 void BaseRaw::resize(ImrSize size) {
     size_t y=size.high, x=size.width;
     this->width = x;

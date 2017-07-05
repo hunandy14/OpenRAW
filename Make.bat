@@ -9,8 +9,8 @@ set project=OpenRAW
 set folder=%OneDrive%\Git Repository\%project%
 ::=========================================================================
 ::檔案名稱 - 多檔編譯(自動補上".cpp")
-set main=OpenRAW_getmask
-set file0=
+set main=OpenRAW_main
+set file0=OpenRAW
 set file1=
 set file2=
 set file3=
@@ -19,6 +19,7 @@ set file5=
 set file6=
 set file7=
 set file9=
+set other=
 ::=========================================================================
 ::進階選項
 ::C++標準(可留空預設)
@@ -89,7 +90,7 @@ if "%lib9%" NEQ "" set lib9=-l"%lib9%"
 ::判定是否為工作目錄
 if "%folder%" == "%cd%" (
 ::編譯並執行程序
-g++ %Wall% %std% %O% %main%.cpp^
+g++ %Wall% %std% %O% %main%.cpp %other%^
  %Inc0% %Inc1% %Inc2% %Inc3% %Inc4%^
  %Ldir0% %Ldir1% %Ldir2% %Ldir3% %Ldir4%^
  %file0% %file1% %file2% %file3% %file4%^

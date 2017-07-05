@@ -4,9 +4,12 @@ Date : 2016/08/04
 By   : CharlotteHonG
 Final: 2017/05/21
 **********************************************************/
-#ifndef OPEN_RAW_HPP
-#define OPEN_RAW_HPP
+#pragma once
 
+#if defined(_MSC_VER) 
+    #define or ||
+    #define and &&
+#endif
 
 #include <iostream>
 #include <fstream>
@@ -180,6 +183,3 @@ private: // 成員(函式)
     void histogram();
 };
 } //Imgraw
-
-
-#endif

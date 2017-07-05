@@ -6,8 +6,6 @@ Final: 2017/02/21
 **********************************************************/
 #include <iostream>
 #include "OpenRAW_fun\OpenRAW.hpp"
-// Visual Studio 編譯需刪除該行與該檔案
-#include "OpenRAW.cpp" // GCC單檔編譯用
 
 using namespace std;
 using namespace imr;
